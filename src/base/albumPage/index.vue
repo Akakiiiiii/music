@@ -2,8 +2,8 @@
   <!-- 通过传递参数给子组件，标题，加载样式，图片链接，歌单名称，作者头像，作者昵称，歌单介绍，评论数，分享数，歌单歌曲数，收藏数，是否收藏 -->
   <song-list-page :title="title"
                   :load="load"
-                  :imgUrl="albumInfo.coverImgUrl ? albumInfo.coverImgUrl : albumInfo.album ? albumInfo.album.picUrl : ''"
-                  :albumTitle="albumInfo.name ? albumInfo.name : albumInfo.album ? albumInfo.album.name : ''"
+                  :imgUrl="imgUrl"
+                  :albumTitle="name"
                   :albumId="albumId"
                   :idxId="idxId"
                   :idxComId="idxComId"
@@ -32,24 +32,25 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import songList from 'base/song'
 import songListPage from 'base/songListPage'
 import api from 'api'
 
 export default {
-  name: '',
+  name: 'albumPage',
   data () {
     return {
       // 存储信息的数组
       albumInfo: [],
       // 用来定义是否显示load加载组件
       load: true,
-      albumId: 0,
       dishId: 0,
       idxId: 0,
       idxComId: 0,
-      title: ''
+      title: '',
+      imgUrl: '',
+      name: ''
     }
   },
   components: {
@@ -60,6 +61,7 @@ export default {
    * 生命钩子函数在实例创建完成后被立即调用
    */
   created () {
+    this.getParams()
     this.load = true
     this.albumInfo = []
     let albumId = this.$route.params.albumId
@@ -67,8 +69,8 @@ export default {
     let dishId = this.$route.params.dishId
     if (albumId) {
       this.title = '歌单'
-      this.albumId = +albumId
       this._getInfo(albumId)
+      this.setAlbumId(albumId)
       return
     }
     if (idxId || idxId === 0) {
@@ -81,21 +83,21 @@ export default {
       this.title = '专辑'
       this.dishId = +dishId
       this._getDishInfo(dishId)
-      return
     }
-    // !Number(0) === true
-    /**
-     * 判断当在歌单页面刷新时无法获取到歌单内容
-     * 获取到的id值为undefined
-     */
-    if (!idxId || !albumId || !dishId) {
-      this.$router.go(-1)
+  },
+  activated () {
+    if (this.albumId !== this.$route.params.albumId) {
+      this.load = true
+      this.getParams()
+      this._getInfo(this.$route.params.albumId)
+      this.setAlbumId(this.$route.params.albumId)
     }
   },
   computed: {
-    ...mapGetters({ audioSong: 'AUDIO_ING_SONG' })
+    ...mapGetters({ audioSong: 'AUDIO_ING_SONG', albumId: 'ALBUM_ID' })
   },
   methods: {
+    ...mapMutations({ setAlbumId: 'SET_USING_ALBUM_ID' }),
     /**
      * 根据传入的id获取歌单信息
      *
@@ -106,6 +108,7 @@ export default {
       api.albumDetailFn(id)
         // 请求成功后返回数据
         .then(res => {
+          console.log(res.data)
           // 接受数据
           const data = res.data
           // 查看返回数据的 code 状态，如果是 200 的话进行使用
@@ -139,6 +142,7 @@ export default {
     _getDishInfo (id) {
       api.getDishInfoFn(id)
         .then(res => {
+          console.log(res.data)
           const data = res.data
           if (data.code === 200) {
             this.albumInfo = data
@@ -156,6 +160,10 @@ export default {
       this.startPlayAll({
         list: this.albumInfo.tracks
       })
+    },
+    getParams () {
+      this.name = this.$route.params.name
+      this.imgUrl = this.$route.params.imgUrl
     },
     ...mapActions(['selectPlay', 'startPlayAll'])
   },

@@ -384,10 +384,10 @@ export default {
         // 当 top 到了 250 的时候会改变标题行的是否固定样式
         if (top >= 250) {
           this.listFixed = true
-          this.top = '1.3rem'
+          this.top = '1rem'
         } else {
           this.listFixed = false
-          this.top = '0.5rem'
+          this.top = '0rem'
         }
       }
     }
@@ -433,13 +433,13 @@ export default {
     .collection {
       .pd23();
       font-size: smaller;
-      margin-top: 3px;
-      height: 0.7rem;
-      line-height: 0.7rem;
+      margin-top: 0.125rem;
+      height: 0.75rem;
+      line-height: 0.75rem;
       border-radius: 0.4rem;
       color: #999;
       &.bg {
-        background-color: @bgcolor;
+        background: linear-gradient(to bottom, #ff1a00 19%, #ff1a00 50%);
         color: #fff;
       }
     }
@@ -481,9 +481,8 @@ export default {
         .img-info {
           @size: 2.6rem;
           width: @size;
-          height: 0;
+          height: @size;
           position: relative;
-          padding-bottom: @size;
           border-radius: @imgBorderRadius;
           overflow: hidden;
           img {
@@ -518,8 +517,7 @@ export default {
             .img-info {
               @size: 0.6rem;
               width: @size;
-              height: 0;
-              padding-bottom: @size;
+              height: @size;
               margin-right: 8px;
               border-radius: 50%;
               overflow: hidden;

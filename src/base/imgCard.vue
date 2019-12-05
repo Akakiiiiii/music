@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   name: '',
   props: {
@@ -119,13 +120,14 @@ export default {
      * 当没有idx时，查看是否有albumId，如果有跳转歌单页面
      * 如果有idx时说明是排行榜页面，跳转到排行榜页面
      */
+    ...mapMutations({ setAlbumId: 'SET_USING_ALBUM_ID' }),
     searchIdx (idx) {
       if (!idx) {
         if (this.albumId) {
           // [vue-router] Route with name 'albumPage' does not exist
           // 需要给路由设置name
           // 并且这个路由在配置的时候不能加 /:id
-          this.$router.push({ name: 'albumPage', params: { albumId: this.albumId } })
+          this.$router.push({ name: 'albumPage', params: { albumId: this.albumId, imgUrl: this.imgUrl, name: this.dec } })
           // this.$router.push(`/albumPage/${this.albumId}`)
           return
         }

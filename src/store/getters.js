@@ -13,6 +13,7 @@ const getters = {
   LEVEL: state => state.level,
   ACCOUNT_UID: state => state.accountUid,
   LOAD: state => state.load,
+  ALBUM_ID: state => state.albumId,
   LINK_PAGE: state => state.linkPage,
   PLAY_STATE: state => state.playState,
   FULL_SCREEN: state => state.fullScreen,

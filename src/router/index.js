@@ -314,7 +314,7 @@ export default new Router({
     }]
   }, {
     // 通用专辑展示页面
-    path: '/albumPage',
+    path: '/albumPage/:albumId/:name/:imgUrl',
     name: 'albumPage',
     component: albumPage
   }, {

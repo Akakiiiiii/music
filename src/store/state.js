@@ -15,5 +15,6 @@ export default {
   audioIngIndex: -1, // 正在播放的这一首歌曲索引
   playingShow: true, // 是否显示转盘播放页面
   offsetLyric: 0, // 设置歌词偏移
-  level: 0 // 用户等级
+  level: 0, // 用户等级
+  albumId: 0
 }

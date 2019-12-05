@@ -1,7 +1,5 @@
 export const getRandomArrayElements = (arr, count) => {
   // eslint-disable-next-line one-var
-  console.log('111')
-  // eslint-disable-next-line one-var
   let shuffled = arr.slice(0),
     // 克隆一个数组，为了不影响外边的数据
     i = arr.length,

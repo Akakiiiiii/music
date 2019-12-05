@@ -23,7 +23,8 @@ import {
   SET_PLAY_LIST,
   SET_AUDIO_MODE,
   SET_PLAYING_SHOW,
-  SET_LEVEL
+  SET_LEVEL,
+  SET_USING_ALBUM_ID
 } from './mutation-types'
 
 // 实现侧边栏显示时底部不跟随滚动
@@ -140,5 +141,8 @@ export default {
    */
   [SET_PLAYING_SHOW] (state, boolean) {
     state.playingShow = boolean
+  },
+  [SET_USING_ALBUM_ID] (state, albumID) {
+    state.albumId = albumID
   }
 }
