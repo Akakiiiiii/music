@@ -1,13 +1,8 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-07-30 16:42:30
- * @Update: 2019-10-30 13:05:17
- * @Update log: 更新日志
- -->
 <template>
   <div class="wrapper border-top">
     <span @click="TOGGLE_MODE">
-      <i class="login" :class="{ iconyueliang1,  icontaiyang }"></i>
+      <i class="login"
+         :class="{ iconyueliang1,  icontaiyang }"></i>
       <!-- 在 vue 中，通过 v-once 指令，可以有效提高静态内容展示效率 -->
       <span>{{ modeText }}间模式</span>
     </span>
@@ -27,9 +22,11 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'loginBottom',
   computed: {
-    ...mapGetters({ iconyueliang1: 'ICON_NIGHT',
+    ...mapGetters({
+      iconyueliang1: 'ICON_NIGHT',
       icontaiyang: 'ICON_SUN',
-      modeText: 'MODE_TEXT' })
+      modeText: 'MODE_TEXT'
+    })
   },
   methods: {
     logout () {

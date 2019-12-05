@@ -1,9 +1,3 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-31 10:19:23
- * @Update: 2019-10-24 08:50:52
- * @Update log: 展示页面加载动画
- -->
 <template>
   <div class="container">
     <div class="page-loading">
@@ -61,13 +55,14 @@ export default {
   }
 
   @keyframes grow {
-    0%,
-    100% {
-      transform: scaleY(1);
+    0% {
+      transform: scaley(1);
     }
-
     50% {
       transform: scaleY(2);
+    }
+    100% {
+      transform: scaley(1);
     }
   }
 }

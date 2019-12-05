@@ -1,33 +1,42 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-07 12:09:22
- * @Update: 2019-11-08 13:45:23
- * @Update log: 更新日志
- -->
 <template>
-  <div class="list-item" @click="startSong">
-    <div class="img-info" v-if="imgUrl">
-      <img v-lazy="imgUrl + '?param=50y50'" :key="imgUrl" v-show="!nowSong" />
-      <i class="result yinliang" v-show="nowSong"></i>
+  <div class="list-item"
+       @click="startSong">
+    <div class="img-info"
+         v-if="imgUrl">
+      <img v-lazy="imgUrl + '?param=50y50'"
+           :key="imgUrl"
+           v-show="!nowSong" />
+      <i class="result yinliang"
+         v-show="nowSong"></i>
     </div>
-    <div class="index" v-if="num">
+    <div class="index"
+         v-if="num">
       <span v-show="!nowSong">{{ num }}</span>
-      <i class="result yinliang" v-show="nowSong"></i>
+      <i class="result yinliang"
+         v-show="nowSong"></i>
     </div>
     <div class="song-info">
-      <p class="song-name" :class="{twoLine}">
+      <p class="song-name"
+         :class="{twoLine}">
         <!-- {{songName | setKeyWords}} -->
         <!-- 注意 如果使用 v-html 显示内容可能会把子节点内容覆盖 -->
         <span v-html="songName"></span>
-        <span class="alia" v-show="alia">({{alia}})</span>
+        <span class="alia"
+              v-show="alia">({{alia}})</span>
+        <span class="transName"
+              v-if="transName">{{`(${transName})`}}</span>
       </p>
-      <p class="song-art" v-if="type==='songList'">
+      <p class="song-art"
+         v-if="type==='songList'">
         <span>
-          <span class="artist" v-for="(item, index) in artists" :key="index">{{ item.name }}</span>
+          <span class="artist"
+                v-for="(item, index) in artists"
+                :key="index">{{ item.name }}</span>
         </span>
         <span class="album-name">{{ albumName }}</span>
       </p>
-      <p class="dj-info" v-if="type==='djList'">
+      <p class="dj-info"
+         v-if="type==='djList'">
         <span class="data">{{createTime | setMonth}}</span>
         <span class="count">
           <i class="result bofang1"></i>
@@ -39,7 +48,8 @@
         </span>
       </p>
     </div>
-    <div class="icon" @click.stop="showSlider(itemId)">
+    <div class="icon"
+         @click.stop="showSlider(itemId)">
       <i class="result diandiandian"></i>
     </div>
   </div>
@@ -94,6 +104,10 @@ export default {
     },
     keywords: {
       type: String
+    },
+    transName: {
+      type: String,
+      default: ''
     }
   },
   filters: {
@@ -134,20 +148,15 @@ export default {
   }
   .img-info {
     width: 0.7rem;
-    height: 0;
-    padding-bottom: 0.7rem;
+    height: 0.7rem;
     margin-right: 0.2rem;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
       border-radius: 0.1rem;
       width: 0.7rem;
       height: 0.7rem;
-    }
-    .yinliang {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate3d(-50%, -50%, 0);
     }
   }
   .song-info {
@@ -161,6 +170,10 @@ export default {
       .alia {
         color: #7c7b7d;
       }
+      .transName {
+        padding-left: 0.05rem;
+        color: #dacdcd;
+      }
       &.twoLine {
         max-height: 0.8rem;
         white-space: normal;
@@ -171,7 +184,7 @@ export default {
       height: 0.4rem;
       line-height: 0.4rem;
       font-size: 0.23rem;
-      color: #dacdcd;
+      color: #7c7b7d;
       width: 75vw;
       .ellipsis();
       .artist {

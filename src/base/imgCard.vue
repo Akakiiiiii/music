@@ -1,33 +1,41 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-08 14:37:08
- * @Update: 2019-11-12 21:42:40
- * @Update log: 通用的方形展示组件
- -->
 <template>
-  <div class="img-card" @click="searchIdx(idx)" :style="{width, marginTop:top}">
-    <span class="tag" v-if="playCount">
+  <div class="img-card"
+       @click="searchIdx(idx)"
+       :style="{width, marginTop:top}">
+    <span class="tag"
+          v-if="playCount">
       <i class="card cardbofang"></i>
       {{playCount | setPlayCount}}
     </span>
-    <span class="swiper-tag" v-if="swiper">
+    <span class="swiper-tag"
+          v-if="swiper">
       <i class="card cardbofang1"></i>
     </span>
-    <span class="fine-tag" v-if="fine">
+    <span class="fine-tag"
+          v-if="fine">
       <i class="card cardhuangguan"></i>
     </span>
-    <span class="time-tag" v-if="updateTime">{{ updateTime }}</span>
-    <div class="img-con" :style="{width,paddingBottom:width}">
+    <span class="time-tag"
+          v-if="updateTime">{{ updateTime }}</span>
+    <div class="img-con"
+         :style="{width,paddingBottom:width}">
       <div class="shadow"></div>
       <!-- 增加key属性，是可以动态切换图片，解决了在none到block时不能正确显示 -->
-      <img v-lazy="imgUrl + '?param=200y200'" :key="imgUrl" class="image" />
-      <span class="dj-name" v-show="type === 'dj'">{{name}}</span>
+      <img v-lazy="imgUrl + '?param=200y200'"
+           :key="imgUrl"
+           class="image" />
+      <span class="dj-name"
+            v-show="type === 'dj'">{{name}}</span>
       <!-- 跳转到专辑详情页 -->
       <!-- <router-link class="cover"  @click="toAlbum(albumId)" :to="'/albumPage/'+albumId"></router-link> -->
     </div>
-    <div class="dec" :class="{lines:lines === 'one',twoLines:lines === 'two'}">{{ dec }}</div>
-    <div class="artists" v-if="artists">
-      <span v-for="(item, index) in artists" :key="index" class="artist">{{ item.name }}</span>
+    <div class="dec"
+         :class="{lines:lines === 'one',twoLines:lines === 'two'}">{{ dec }}</div>
+    <div class="artists"
+         v-if="artists">
+      <span v-for="(item, index) in artists"
+            :key="index"
+            class="artist">{{ item.name }}</span>
     </div>
   </div>
 </template>

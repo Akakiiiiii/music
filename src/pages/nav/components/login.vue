@@ -1,9 +1,3 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-07-30 16:42:30
- * @Update: 2019-11-05 18:46:36
- * @Update log: 更新日志
- -->
 <template>
   <div class="login-menu">
     <login-top :loginState="loginState"></login-top>

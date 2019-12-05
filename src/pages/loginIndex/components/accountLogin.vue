@@ -1,8 +1,7 @@
 <template>
   <div class="wrapper">
-    <login-nav>
-      <span class="text"
-            @click="returnPage">{{text}}</span>
+    <login-nav @returnPage="returnPage">
+      <span class="text">{{text}}</span>
     </login-nav>
     <router-view></router-view>
   </div>

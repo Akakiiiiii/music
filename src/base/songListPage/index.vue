@@ -1,26 +1,28 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-06 11:33:42
- * @Update: 2019-10-29 13:29:48
- * @Update log: 这是一个用来展示歌曲列表的基础组件
- -->
 <template>
   <!-- 页面需要监听滚动事件，滚动到某个位置时标题栏要固定 -->
   <!-- 这里需要增加动态的改变样式信息，不是只有显示隐藏！！！！！！！！！ -->
-  <div class="wrapper" @scroll="scrollList">
+  <div class="wrapper"
+       @scroll="scrollList">
     <!-- 由于歌单页和今日推荐页面的顶部展示区域高度不同，所以通过动态的 height 进行设置 -->
-    <div class="container-top" :style="{height}">
+    <div class="container-top"
+         :style="{height}">
       <!-- 通过传值 isAlbum 的布尔值进行判断，因为在今日推荐页面的页面标题是通过滚动显示隐藏的 -->
-      <global-nav class="fixed pd23" v-if="!isAlbum" @returnPage="returnPage">
+      <global-nav class="fixed pd23"
+                  v-if="!isAlbum"
+                  @returnPage="returnPage">
         <!-- 通过改变 listFixed 来控制 title 的显示与否-->
-        <span class="text" v-show="listFixed">{{iTitle}}</span>
+        <span class="text"
+              v-show="listFixed">{{iTitle}}</span>
       </global-nav>
       <!-- 这里是在歌单页面时，页面标题是一直显示的 -->
-      <global-nav class="fixed pd23" v-if="isAlbum" @returnPage="returnPage">
+      <global-nav class="fixed pd23"
+                  v-if="isAlbum"
+                  @returnPage="returnPage">
         <span class="text">{{iTitle}}</span>
       </global-nav>
       <!-- 这里包裹的是每日推荐页面额外显示的日期信息 -->
-      <div class="pd23" v-if="!isAlbum">
+      <div class="pd23"
+           v-if="!isAlbum">
         <div class="date">
           <span class="day">{{day}}</span>
           <span class="month">{{month}}</span>
@@ -28,10 +30,13 @@
         <div class="info">查收属于您的今日推荐</div>
       </div>
       <!-- 这里包裹的是歌单页面的图片，作者，介绍等信息 -->
-      <div class="album-info pd23" v-if="isAlbum">
+      <div class="album-info pd23"
+           v-if="isAlbum">
         <div class="info-top">
           <div class="img-info">
-            <img v-lazy="imgUrl + '?param=200y200'" :key="imgUrl" alt />
+            <img v-lazy="imgUrl + '?param=200y200'"
+                 :key="imgUrl"
+                 alt />
             <span class="play-count">
               <i class="date-song bofang"></i>
               {{playCount | setPlay}}
@@ -41,7 +46,9 @@
             <p class="album-title">{{iAlbumTitle}}</p>
             <div class="creator">
               <div class="img-info">
-                <img v-lazy="creatorImgUrl + '?param=200y200'" :key="imgUrl" alt />
+                <img v-lazy="creatorImgUrl + '?param=200y200'"
+                     :key="imgUrl"
+                     alt />
               </div>
               <span>
                 {{author}}
@@ -55,7 +62,8 @@
           </div>
         </div>
         <div class="icons">
-          <div class="comments" @click="goComments">
+          <div class="comments"
+               @click="goComments">
             <i class="date-song pinglun"></i>
             <span>{{commentCount | setCom}}</span>
           </div>
@@ -75,14 +83,16 @@
       </div>
     </div>
     <!-- 这里是 播放全部 那一行的信息，因为要操作是否固定，所以需要单独设置 -->
-    <div class="title pd23" :class="{listFixed}">
+    <div class="title pd23"
+         :class="[listFixed?'listFixed':'']">
       <span>
         <span @click="beginAudio">
           <i class="date-song cbofang"></i>
           播放全部
         </span>
         <!-- 当歌单组件时，需要显示当前歌单总共有多少首歌曲的信息 -->
-        <span class="count" v-if="isAlbum">(共{{trackCount}}首)</span>
+        <span class="count"
+              v-if="isAlbum">(共{{trackCount}}首)</span>
       </span>
       <!-- 当在每日推荐界面时，这里显示的是一个多选按钮 -->
       <!-- 这里的多选需要设置一个多选页面的组件！！！！！！！！！ -->
@@ -92,16 +102,23 @@
       </span>
       <!-- 当时歌单组件时有收藏歌单的按钮选项 -->
       <!-- 这里需要添加判断用户是否已经收藏歌单！！！！来显示不同的样式 -->
-      <div class="collection" :class="{ 'bg': !isSubInItem }" ref="collection" v-if="isAlbum">
-        <span v-show="!isSubInItem" @click="addPlaylist">+ 收藏({{subscribedCountItem | setCol}})</span>
-        <span v-show="isSubInItem" @click="deletePlaylist">
+      <div class="collection"
+           :class="{ 'bg': !isSubInItem }"
+           ref="collection"
+           v-if="isAlbum">
+        <span v-show="!isSubInItem"
+              @click="addPlaylist">+ 收藏({{subscribedCountItem | setCol}})</span>
+        <span v-show="isSubInItem"
+              @click="deletePlaylist">
           <i class="date-song wenjianjia"></i>
           {{subscribedCountItem | setCol}}
         </span>
       </div>
     </div>
     <!-- 这里将列表进行包裹统一的通过 load 属性进行判断是否展示 -->
-    <div class="list-info" v-show="!load" :style="{ marginTop: top}">
+    <div class="list-info"
+         v-show="!load"
+         :style="{ marginTop: top}">
       <slot></slot>
     </div>
     <!-- 页面 loading 组件 -->
@@ -140,7 +157,7 @@ export default {
       iTitle: this.title,
       iAlbumTitle: this.albumTitle,
       listFixed: false,
-      top: '0.5rem',
+      top: '0',
       isSubInItem: false,
       subscribedCountItem: 0
     }
@@ -272,19 +289,17 @@ export default {
      * 返回日
      */
     day: function () {
-      const day = new Date().getDate() < 10
+      return new Date().getDate() < 10
         ? '0' + new Date().getDate()
         : new Date().getDate()
-      return day
     },
     /**
      * 返回月份
      */
     month: function () {
-      const month = new Date().getMonth() + 1 < 10
+      return new Date().getMonth() + 1 < 10
         ? '0' + (new Date().getMonth() + 1)
         : new Date().getMonth() + 1
-      return month
     }
   },
   methods: {
@@ -338,6 +353,8 @@ export default {
      * 返回上一页
      */
     returnPage () {
+      this.listFixed = false
+      this.top = '0'
       this.$router.go(-1)
     },
     /**
@@ -346,15 +363,15 @@ export default {
      */
     scrollList (e) {
       // 获取到 top 值
-      let top = this.$el.scrollTop
+      let top = e.target.scrollTop
       // 当当前组件不是歌单组件时，就是每日推荐页面
       if (!this.isAlbum) {
-        if (top >= 148) {
+        if (top >= 136) {
           this.listFixed = true
-          this.top = '1.3rem'
+          this.top = '1rem'
         } else {
           this.listFixed = false
-          this.top = '0.5rem'
+          this.top = '0'
         }
       } else {
         // 当是歌单组件时，当页面滚动到一定位置的时候顶部的标题会变
@@ -448,7 +465,9 @@ export default {
       margin-top: 0.7rem;
     }
     .text {
-      font-size: 0.4rem;
+      padding-left: 0.1rem;
+      font-size: 0.3rem;
+      font-weight: 600;
       vertical-align: 5px;
       width: 8rem;
       .ellipsis();
@@ -543,7 +562,6 @@ export default {
     box-sizing: border-box;
     padding: 0.1rem 0.23rem;
     background-color: #fff;
-    transform: translate3d(0, -0.5rem, 0);
   }
 }
 </style>

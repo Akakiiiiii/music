@@ -1,18 +1,12 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-07-30 16:42:30
- * @Update: 2019-10-03 19:51:17
- * @Update log: 更新日志
- -->
 <template>
   <div class="container border-bottom">
     <ul class="icons-wrapper">
-      <!-- <li v-for="(item, index) in loginIcons" :key="index"
-          :icons="item"
-          is="icon"></li> -->
-      <li class="icon-list" v-for="(item, index) in loginIcons" :key="index">
+      <li class="icon-list"
+          v-for="(item, index) in loginIcons"
+          :key="index">
         <div class="icon">
-          <i class="login" :class="item.icon"></i>
+          <i class="login"
+             :class="item.icon"></i>
         </div>
         <span class="icon-text">{{item.text}}</span>
       </li>
@@ -45,7 +39,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import url('~styles/global.less');
+@import url("~styles/global.less");
 
 .icons-wrapper {
   box-sizing: border-box;

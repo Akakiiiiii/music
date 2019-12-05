@@ -1,9 +1,3 @@
-/*
- * @Author: 李浩栋
- * @Begin: 2019-07-16 19:49:41
- * @Update: 2019-08-18 19:16:52
- * @Update log: 更新日志
- */
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.

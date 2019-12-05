@@ -1,12 +1,9 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-14 15:44:26
- * @Update: 2019-11-19 22:01:42
- * @Update log: 登录页通用顶部导航
- -->
 <template>
-  <nav class="phone-nav" ref="nav" :class="{height: height === 'all'}">
-    <i class="phone iconzuojiantou" @click="returnPage"></i>
+  <nav class="phone-nav"
+       ref="nav"
+       :class="{height: height === 'all'}">
+    <i class="phone iconzuojiantou"
+       @click="returnPage"></i>
     <!-- slot 插槽将不同页面的标题信息显示 -->
     <slot></slot>
   </nav>
@@ -33,8 +30,6 @@ export default {
       this.$refs.nav.style.visibility = 'hidden'
     },
     returnPage () {
-      // 这个方法的参数是一个整数，意思是在 history 记录中向前或者后退多少步
-      // 类似 window.history.go(n)。
       this.$emit('returnPage')
     }
   }
@@ -53,7 +48,7 @@ export default {
   }
   .phone {
     font-size: 0.7rem;
-    margin-right: 5px;
+    padding-right: 5px;
   }
 }
 </style>

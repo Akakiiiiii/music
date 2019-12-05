@@ -1,16 +1,21 @@
 <template>
   <div>
     <transition name="mask-show">
-      <div class="mask" v-show="loginPage" @click="HIDE_LOGIN" @touchmove.prevent></div>
+      <div class="mask"
+           v-show="loginPage"
+           @click="HIDE_LOGIN"
+           @touchmove.prevent></div>
     </transition>
-    <transition name="login-show" mode="out-in">
-      <login v-show="loginPage" @touchmove.prevent></login>
+    <transition name="login-show"
+                mode="out-in">
+      <login v-show="loginPage"
+             @touchmove.prevent></login>
     </transition>
   </div>
 </template>
 
 <script>
-import login from '../pages/nav/components/login'
+import login from './login'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {

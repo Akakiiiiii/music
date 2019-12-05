@@ -1,9 +1,3 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-30 20:21:12
- * @Update: 2019-10-11 13:10:30
- * @Update log: 公共图标组件
- -->
 <template>
   <div class="icon-list" :class="{width}" @click="linkTo">
     <div class="icon" :class="{bgcolor}">

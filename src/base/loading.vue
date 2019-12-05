@@ -1,13 +1,8 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-17 17:10:07
- * @Update: 2019-08-17 18:46:40
- * @Update log: 页面加载样式
- -->
 <template>
   <div>
     <transition>
-      <div class="loading" v-show="isLoading">
+      <div class="loading"
+           v-show="isLoading">
         <p></p>
       </div>
     </transition>

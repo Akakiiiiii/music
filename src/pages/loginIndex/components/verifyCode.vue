@@ -1,24 +1,14 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-18 14:11:40
- * @Update: 2019-11-05 19:21:06
- * @Update log: 更新日志
- -->
 <template>
   <div class="code">
-    <van-password-input
-      :value="value"
-      :length="4"
-      :gutter="15"
-      :focused="showKeyboard"
-      @focus="showKeyboard = true"
-    />
-    <van-number-keyboard
-      :show="showKeyboard"
-      @input="onInput"
-      @delete="onDelete"
-      @blur="showKeyboard = false"
-    />
+    <van-password-input :value="value"
+                        :length="4"
+                        :gutter="15"
+                        :focused="showKeyboard"
+                        @focus="showKeyboard = true" />
+    <van-number-keyboard :show="showKeyboard"
+                         @input="onInput"
+                         @delete="onDelete"
+                         @blur="showKeyboard = false" />
   </div>
 </template>
 

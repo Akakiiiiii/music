@@ -1,26 +1,22 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-07-30 16:42:30
- * @Update: 2019-11-24 12:02:09
- * @Update log: 更新日志
- -->
 <template>
   <div class="wrapper pd23">
     <div class="title">
       <div class="recommended">推荐歌单</div>
-      <router-link to="recommend" tag="div" class="square">歌单广场</router-link>
+      <router-link to="recommend"
+                   tag="div"
+                   class="square">歌单广场</router-link>
     </div>
-    <page-loading style="height:5rem" v-show="load"></page-loading>
-    <div class="img-col" v-show="!load">
+    <page-loading style="height:5rem"
+                  v-show="load"></page-loading>
+    <div class="img-col"
+         v-show="!load">
       <!-- 因为两个接口的属性名不同，这里使用了或 -->
-      <img-card
-        v-for="(item, index) in songList"
-        :key="index"
-        :imgUrl="item.picUrl || item.coverImgUrl"
-        :dec="item.name"
-        :playCount="item.playCount || item.playcount"
-        :albumId="item.id"
-      ></img-card>
+      <img-card v-for="(item, index) in songList"
+                :key="index"
+                :imgUrl="item.picUrl || item.coverImgUrl"
+                :dec="item.name"
+                :playCount="item.playCount || item.playcount"
+                :albumId="item.id"></img-card>
     </div>
   </div>
 </template>
@@ -39,7 +35,8 @@ export default {
     return {
       load: true,
       songList: [],
-      isGetOver: false
+      isGetOver: false,
+      list: []
     }
   },
   created () {
@@ -63,6 +60,9 @@ export default {
         this.isGetOver = isGetOver
       }
     },
+    reGetImgCard () {
+      this.songList = getRandomArrayElements(this.list, 6)
+    },
     /**
      * 在用户没有登陆的情况下随机取出6项进行展示
      */
@@ -70,6 +70,7 @@ export default {
       try {
         const { data } = await api.recSongListFn()
         if (data.code === 200) {
+          this.list = data.playlists
           this.songList = getRandomArrayElements(data.playlists, 6)
           this.load = false
           return true
@@ -87,6 +88,7 @@ export default {
         const { data } = await api.dateRecSongListFn()
         if (data.code === 200) {
           const arr = data.recommend
+          this.list = data.recommend
           this.songList = getRandomArrayElements(arr, 6)
           this.load = false
           return true

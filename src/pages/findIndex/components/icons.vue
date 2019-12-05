@@ -1,19 +1,12 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-07-30 16:42:30
- * @Update: 2019-10-09 12:16:40
- * @Update log: 更新日志
- -->
 <template>
   <div class="container border-bottom">
-    <icon
-      v-for="(item, index) in findIcons"
-      :icons="item"
-      :bgcolor="true"
-      :key="index"
-      @goPage="goPage(item.linkTo)"
-    >
-      <span class="today" v-if="item.text === '每日推荐'">{{today}}</span>
+    <icon v-for="(item, index) in findIcons"
+          :icons="item"
+          :bgcolor="true"
+          :key="index"
+          @goPage="goPage(item.linkTo)">
+      <span class="today"
+            v-if="item.text === '每日推荐'">{{today}}</span>
     </icon>
   </div>
 </template>

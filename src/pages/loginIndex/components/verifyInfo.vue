@@ -1,9 +1,3 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-18 13:55:05
- * @Update: 2019-08-26 14:30:37
- * @Update log: 更新日志
- -->
 <template>
   <div class="container">
     <div class="info">
@@ -17,12 +11,12 @@
         </span>
       </p>
     </div>
-    <div class="renew">重新获取</div>
+    <div class="renew"
+         @click="renew">{{placeholder}}</div>
   </div>
 </template>
 
 <script>
-import { getPhone } from 'utils/getPhone'
 import api from 'api'
 export default {
   name: 'verifyInfo',
@@ -30,7 +24,26 @@ export default {
   data () {
     return {
       phone1: 133,
-      phone2: 1234
+      phone2: 1234,
+      isSend: false,
+      placeholder: '获取验证码'
+    }
+  },
+  watch: {
+    isSend () {
+      let n = 60
+      if (this.isSend) {
+        let timer = setInterval(() => {
+          if (n) {
+            n--
+            this.placeholder = `还剩${n}秒重新发送`
+          } else {
+            this.isSend = false
+            clearInterval(timer)
+            this.placeholder = '重新获取'
+          }
+        }, 1000)
+      }
     }
   },
   methods: {
@@ -38,11 +51,11 @@ export default {
      * 发送验证码
      */
     _sendVerify () {
-      let phone = getPhone()
+      let phone = this.$route.query.phone
       this.showPhone(phone)
-      // 发送验证码
       api.sendVerifyFn(phone)
         .then(res => {
+          this.isSend = true
           console.log(res)
         })
         .catch(error => console.log(error))
@@ -51,18 +64,24 @@ export default {
      * 截取手机号码进行页面显示
      */
     showPhone (phone) {
-      this.phone1 = Array.from(phone).slice(0, 3).join('')
-      this.phone2 = Array.from(phone).slice(-4).join('')
+      this.phone1 = phone.slice(0, 3)
+      this.phone2 = phone.slice(-4)
     },
-    /**
-     * 验证验证码
-     */
-    verify () {
-      let phone = getPhone()
-      let captcha = '111'
-      api.verifyFn(phone, captcha)
-        .then(res => console.log(res))
-        .catch(error => console.log(error))
+    renew () {
+      if (this.isSend) {
+        // eslint-disable-next-line
+        return
+        // eslint-disable-next-line
+      }
+      else {
+        const phone = this.$route.query.phone
+        api.sendVerifyFn(phone)
+          .then(res => {
+            this.isSend = true
+            console.log(res)
+          })
+          .catch(error => console.log(error))
+      }
     }
   },
   created () {

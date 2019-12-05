@@ -1,9 +1,3 @@
-/*
- * @Author: 李浩栋
- * @Begin: 2019-09-12 14:11:33
- * @Update: 2019-09-22 12:15:54
- * @Update log: 更新日志
- */
 import {
   SET_PLAY_SATE,
   SET_FULL_SCREEN,

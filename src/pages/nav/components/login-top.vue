@@ -16,10 +16,10 @@
     </div>
     <!-- 已经登陆状态样式 -->
     <div class="login-ed"
-         @click="goUserInfo"
          v-if="loginState">
       <div class="img-info">
         <img class="account-bg"
+             @click="goUserInfo"
              :src="avatarUrl + '?param=200y200'"
              alt />
       </div>
@@ -127,23 +127,13 @@ export default {
      * 当第二天打开时cookie失效，页面会显示未签到的样子
      */
     setSignCookie () {
-      var curDate = new Date()
-      // 当前时间戳
-      var curTamp = curDate.getTime()
-      // 当日凌晨的时间戳,减去一毫秒是为了防止后续得到的时间不会达到00:00:00的状态
-      var curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1
-      // 当日已经过去的时间（毫秒）
-      var passedTamp = curTamp - curWeeHours
-      // 当日剩余时间
-      var leftTamp = 24 * 60 * 60 * 1000 - passedTamp
-      var leftTime = new Date()
-      leftTime.setTime(leftTamp + curTamp)
-      setCookie('sign', true, leftTime)
+      var nextDay = new Date(new Date().toLocaleDateString()).getTime() + 24 * 60 * 60 * 1000
+      setCookie('sign', true, new Date(nextDay))
     },
     sign () {
-      console.log(getCookie('sign').slice(1))
       api.signInFn()
         .then(res => {
+          console.log(res)
           const { data } = res
           if (data.code === 200) {
             // 签到成功

@@ -56,6 +56,7 @@ export default {
   },
   // 切换夜间 日间模式
   [TOGGLE_MODE] (state) {
+    console.log(this)
     if (state.iconyueliang1) {
       this._mutations.TO_YUE[0](state)
     } else if (state.icontaiyang) {

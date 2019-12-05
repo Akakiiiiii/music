@@ -3,17 +3,32 @@
     <!-- 顶部导航条 -->
     <nav class="nav-wrapper">
       <div class="nav-left">
-        <i class="nav iconnav ripple" @click="SHOW_LOGIN"></i>
+        <i class="nav iconnav ripple"
+           @click="SHOW_LOGIN"></i>
       </div>
       <ul class="nav-center">
-        <router-link tag="li" class="nav-title ripple" replace to="/home">我的</router-link>
-        <router-link tag="li" class="nav-title ripple" replace to="/find">发现</router-link>
-        <router-link tag="li" class="nav-title ripple" replace to="/friend">朋友</router-link>
-        <router-link tag="li" class="nav-title ripple" replace to="/videoPage">视频</router-link>
+        <router-link tag="li"
+                     class="nav-title ripple"
+                     replace
+                     to="/home">我的</router-link>
+        <router-link tag="li"
+                     class="nav-title ripple"
+                     replace
+                     to="/find">发现</router-link>
+        <router-link tag="li"
+                     class="nav-title ripple"
+                     replace
+                     to="/friend">朋友</router-link>
+        <router-link tag="li"
+                     class="nav-title ripple"
+                     replace
+                     to="/videoPage">视频</router-link>
       </ul>
       <div class="nav-right">
         <!-- 注意link时要加上/ 要不然会出现异常情况 -->
-        <router-link to="/search" tag="i" class="nav iconsousuo ripple"></router-link>
+        <router-link to="/search"
+                     tag="i"
+                     class="nav iconsousuo ripple"></router-link>
       </div>
       <login-page-is-show></login-page-is-show>
     </nav>
@@ -24,7 +39,7 @@
 </template>
 
 <script>
-import loginPageIsShow from 'base/loginPageIsShow'
+import loginPageIsShow from './components/loginPageIsShow'
 import { mapMutations } from 'vuex'
 export default {
   name: 'defaultNav',
@@ -92,7 +107,7 @@ export default {
   .nav-center {
     flex: 6;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     color: #999;
     font-size: 0.24rem;

@@ -1,9 +1,3 @@
-<!--
- * @Author: Lambda
- * @Begin: 2019-08-30 19:47:55
- * @Update: 2019-08-30 19:47:55
- * @Update log: 更新日志
- -->
 <template>
   <div id="app">
     <transition name="router-fade"

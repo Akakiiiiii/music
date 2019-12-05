@@ -1,18 +1,18 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-14 15:42:41
- * @Update: 2019-11-05 19:18:59
- * @Update log: 手机号登录密码页面
- -->
 <template>
   <div class="wrapper">
     <div class="inp border-bottom">
-      <input type="password" v-model="pwd" placeholder="请输入密码" ref="inputs" autofocus="autofocus" />
+      <input type="password"
+             v-model="pwd"
+             placeholder="请输入密码"
+             ref="inputs"
+             autofocus="autofocus" />
       <span @click="goForget">忘记密码</span>
     </div>
-    <login-btn @click.native="logon" :title="title"></login-btn>
+    <login-btn @click.native="logon"
+               :title="title"></login-btn>
     <!-- 设置提示语 -->
-    <alert :is-alert="alert" :alert="alertText"></alert>
+    <alert :is-alert="alert"
+           :alert="alertText"></alert>
     <loading :is-loading="loading"></loading>
   </div>
 </template>
@@ -32,7 +32,8 @@ export default {
       alertText: '用户名或密码错误',
       title: '登录',
       loading: false,
-      flag: true
+      flag: true,
+      timer: null
     }
   },
   components: {
@@ -61,7 +62,7 @@ export default {
       // 1s 后隐藏组件
       this.timer = setTimeout(() => {
         this.alert = false
-      }, 1000)
+      }, 5000)
     },
     /**
      * 登陆成功后存取登录状态及信息
@@ -70,6 +71,7 @@ export default {
       api.loginStatusFn()
         .then(res => {
           // 存取用户 id
+          console.log(res)
           let userId = res.data.profile.userId
           if (res.data.code === 200) {
             // 存取用户信息
@@ -91,11 +93,12 @@ export default {
           }
         })
         .catch(err => {
+          this.flag = true
           console.log(err)
         })
     },
     goForget () {
-      const phone = getPhone()
+      const phone = this.$route.query.phone
       this.$router.push(`/verify?phone=${phone}`)
     },
     /**
@@ -105,6 +108,7 @@ export default {
      * 刷新页面
      */
     _getUserDetail (uid) {
+      console.log('1111')
       api.userDetailFn(uid)
         .then(res => {
           const { data } = res
@@ -114,7 +118,7 @@ export default {
             // 跳转到发现页面
             this.$router.push({ path: '/find' })
             console.log('跳转了')
-            // location.reload()
+            location.reload()
           }
         })
     },
@@ -136,10 +140,13 @@ export default {
     _isSure (phone, pwd) {
       api.phoneLoginFn(phone, pwd)
         .then(res => {
-          // 密码正确
-          // 将账号存下，以后登录时账号输入框自动填写
-          localStorage.setItem('account', phone)
-          this.success()
+          if (res.data.code === 502) {
+            this.error()
+          } else {
+            console.log(res)
+            localStorage.setItem('account', phone)
+            this.success()
+          }
         })
         // eslint 报 handle-callback-err 错误 添加 if 判断
         .catch(error => {

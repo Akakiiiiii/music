@@ -1,43 +1,33 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-06 11:47:11
- * @Update: 2019-11-02 14:11:21
- * @Update log: 这个是歌单展示的通用组件
- -->
 <template>
   <!-- 通过传递参数给子组件，标题，加载样式，图片链接，歌单名称，作者头像，作者昵称，歌单介绍，评论数，分享数，歌单歌曲数，收藏数，是否收藏 -->
-  <song-list-page
-    :title="title"
-    :load="load"
-    :imgUrl="albumInfo.coverImgUrl ? albumInfo.coverImgUrl : albumInfo.album ? albumInfo.album.picUrl : ''"
-    :albumTitle="albumInfo.name ? albumInfo.name : albumInfo.album ? albumInfo.album.name : ''"
-    :albumId="albumId"
-    :idxId="idxId"
-    :idxComId="idxComId"
-    :dishId="dishId"
-    :creatorImgUrl="albumInfo.creator ? albumInfo.creator.avatarUrl : albumInfo.album ? albumInfo.album.artist.picUrl:''"
-    :author="albumInfo.creator ? albumInfo.creator.nickname : albumInfo.album ? albumInfo.album.artist.name : ''"
-    :description="albumInfo.description ? albumInfo.description : albumInfo.album ? albumInfo.album.description : ''"
-    :commentCount="albumInfo.commentCount ? albumInfo.commentCount : albumInfo.album ? albumInfo.album.info.commentCount : 0"
-    :shareCount="albumInfo.shareCount ? albumInfo.shareCount : albumInfo.album ? albumInfo.album.info.shareCount : 0"
-    :trackCount="albumInfo.trackCount ? albumInfo.trackCount : albumInfo.album ? albumInfo.album.size : 0"
-    :subscribedCount="albumInfo.subscribedCount"
-    :subscribed="albumInfo.subscribed"
-    :isSubIn="albumInfo.subscribed"
-    :playCount="albumInfo.playCount"
-    @startPlayAll="startPlay"
-  >
+  <song-list-page :title="title"
+                  :load="load"
+                  :imgUrl="albumInfo.coverImgUrl ? albumInfo.coverImgUrl : albumInfo.album ? albumInfo.album.picUrl : ''"
+                  :albumTitle="albumInfo.name ? albumInfo.name : albumInfo.album ? albumInfo.album.name : ''"
+                  :albumId="albumId"
+                  :idxId="idxId"
+                  :idxComId="idxComId"
+                  :dishId="dishId"
+                  :creatorImgUrl="albumInfo.creator ? albumInfo.creator.avatarUrl : albumInfo.album ? albumInfo.album.artist.picUrl:''"
+                  :author="albumInfo.creator ? albumInfo.creator.nickname : albumInfo.album ? albumInfo.album.artist.name : ''"
+                  :description="albumInfo.description ? albumInfo.description : albumInfo.album ? albumInfo.album.description : ''"
+                  :commentCount="albumInfo.commentCount ? albumInfo.commentCount : albumInfo.album ? albumInfo.album.info.commentCount : 0"
+                  :shareCount="albumInfo.shareCount ? albumInfo.shareCount : albumInfo.album ? albumInfo.album.info.shareCount : 0"
+                  :trackCount="albumInfo.trackCount ? albumInfo.trackCount : albumInfo.album ? albumInfo.album.size : 0"
+                  :subscribedCount="albumInfo.subscribedCount"
+                  :subscribed="albumInfo.subscribed"
+                  :isSubIn="albumInfo.subscribed"
+                  :playCount="albumInfo.playCount"
+                  @startPlayAll="startPlay">
     <!-- 这是一个通用的用来展示歌曲列表的组件，通过for循环组件进行渲染  这里使用 index+1 展示了页面的索引值 -->
-    <song-list
-      v-for="(item, index) in albumInfo.tracks || albumInfo.songs"
-      :key="index"
-      :songName="item.name"
-      :artists="item.ar"
-      :albumName="item.al.name"
-      :num="index + 1"
-      @beginSong="setAudioList(item, index)"
-      :nowSong="item.id === audioSong.id"
-    ></song-list>
+    <song-list v-for="(item, index) in albumInfo.tracks || albumInfo.songs"
+               :key="index"
+               :songName="item.name"
+               :artists="item.ar"
+               :albumName="item.al.name"
+               :num="index + 1"
+               @beginSong="setAudioList(item, index)"
+               :nowSong="item.id === audioSong.id"></song-list>
   </song-list-page>
 </template>
 
@@ -70,11 +60,6 @@ export default {
    * 生命钩子函数在实例创建完成后被立即调用
    */
   created () {
-    // if (this.albumInfo) {
-    //   this.$router.go(-1)
-    // }
-  },
-  activated () {
     this.load = true
     this.albumInfo = []
     let albumId = this.$route.params.albumId

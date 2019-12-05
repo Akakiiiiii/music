@@ -1,29 +1,25 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-12 18:16:59
- * @Update: 2019-08-31 09:51:04
- * @Update log: 手机号登陆账号页面
- -->
 <template>
   <div class="wrapper">
     <div class="info">未注册手机号登录后将自动创建账号</div>
     <!-- 绑定内联样式 使用 对象 -->
-    <div class="inp border-bottom" :style="{opacity}">
+    <div class="inp border-bottom"
+         :style="{opacity}">
       <span>+86</span>
-      <input
-        type="text"
-        v-model.trim="phone"
-        placeholder="请输入手机号"
-        ref="inputs"
-        autofocus="autofocus"
-        @input="canShow"
-      />
-      <i v-show="isShow" class="phone iconguanbi" @click="clearInput"></i>
+      <input type="text"
+             v-model.trim="phone"
+             placeholder="请输入手机号"
+             ref="inputs"
+             :autofocus="true"
+             @input="canShow" />
+      <i v-show="isShow"
+         class="phone iconguanbi"
+         @click="clearInput"></i>
     </div>
     <login-btn @click.native="clickEvent"></login-btn>
     <transition>
       <!-- 提示语 -->
-      <alert :is-alert="alert" alert="请输入11位数字的手机号"></alert>
+      <alert :is-alert="alert"
+             alert="请输入11位数字的手机号"></alert>
     </transition>
   </div>
 </template>
@@ -42,7 +38,8 @@ export default {
       opacity: 0.5,
       alert: false,
       timer: null,
-      flag: true
+      flag: true,
+      localTimer: null
     }
   },
   components: {
@@ -78,6 +75,13 @@ export default {
      * 空的时候input有opacity
      */
     canShow () {
+      if (!this.localTimer) {
+        this.localTimer = setTimeout(() => {
+          localStorage.setItem('account', this.phone)
+          clearTimeout(this.localTimer)
+          this.localTimer = null
+        }, 1000)
+      }
       this.isShow = this.phone
       if (this.isShow) {
         this.opacity = 1
@@ -92,6 +96,7 @@ export default {
       // 如果输入内容不合法，提示组件显示
       // 显示一段时间后隐藏
       if (this.timer) {
+        console.log('11')
         clearTimeout(this.timer)
         this.timer = null
       }
@@ -116,7 +121,6 @@ export default {
           // 如果输入内容不合法
           this.alertEvent()
           // 输入框内容为空
-          this.clearInput()
           // 按钮恢复
           this.flag = true
         }
@@ -130,6 +134,7 @@ export default {
       let self = this
       api.phoneRegisteredFn(phone)
         .then(res => {
+          console.log(res)
           if (res.data.exist !== -1) {
             // 已经注册 跳转到输入密码页面
             // 携带参数（手机号）跳转
