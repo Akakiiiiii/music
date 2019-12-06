@@ -3,18 +3,13 @@
     <div class="mask"
          v-show="isFull"></div>
     <div class="full pd23"
-         v-show="isFull">
+         v-if="isFull">
       <audio-nav class="color"
                  height="0"
                  @returnPage="returnPage">
-        <div>
-          <p class="title">{{name}}</p>
-          <p class="text">
-            <span class="art"
-                  v-for="(item, index) in artist"
-                  :key="index">{{item.name}}</span>
-          </p>
-        </div>
+        <scrollText :name="name"
+                    :artist='artist'>
+        </scrollText>
       </audio-nav>
       <playing :imgUrl="imgUrl"
                v-show="playingShow"
@@ -76,8 +71,10 @@ import functionButton from './components/functionButton'
 import smallAudio from './components/small'
 import lyricPage from './components/lyricPage'
 import audioList from './components/audioList'
+import scrollText from 'base/scrollText'
 import { getRandomArrayElements } from 'utils/getRandomArrayElements'
 import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: '',
   data () {
@@ -150,7 +147,6 @@ export default {
       })
     },
     'playList.length': function (newV) {
-      console.log('wacth')
       if (!newV) {
         this.isShowAudioList = false
       }
@@ -540,7 +536,8 @@ export default {
     functionButton,
     smallAudio,
     lyricPage,
-    audioList
+    audioList,
+    scrollText
   }
 }
 </script>
@@ -559,12 +556,19 @@ export default {
   .color {
     color: #fff;
   }
+  .title-wrap {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 5.3rem;
+  }
   .title {
+    display: inline;
+    font-weight: 600;
     color: #fff;
-    line-height: 1.5;
+    font-size: 0.35rem;
   }
   .text {
-    font-size: 0.24rem;
+    font-size: 0.2rem;
     color: #bdc3c7;
     .art {
       &::after {

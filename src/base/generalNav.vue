@@ -4,12 +4,16 @@
        :class="{height: height === 'all'}">
     <i class="phone iconzuojiantou"
        @click="returnPage"></i>
-    <!-- slot 插槽将不同页面的标题信息显示 -->
     <slot></slot>
+    <slot name="artist"></slot>
+    <i class="iconfont icon-fenxiang-1"
+       v-if="height=='0'"></i>
+    <!-- slot 插槽将不同页面的标题信息显示 -->
   </nav>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'loginNav',
   props: {
@@ -21,6 +25,9 @@ export default {
       type: String,
       default: 'all'
     }
+  },
+  computed: {
+    ...mapGetters({ isFull: 'FULL_SCREEN' })
   },
   methods: {
     visible () {
@@ -37,6 +44,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url("//at.alicdn.com/t/font_1550123_8ybvu6bwh0w.css");
 @import url("//at.alicdn.com/t/font_1351323_oxqdjg3rufq.css");
 
 .phone-nav {
@@ -49,6 +57,10 @@ export default {
   .phone {
     font-size: 0.7rem;
     padding-right: 5px;
+    font-weight: 300;
+  }
+  .icon-fenxiang-1 {
+    font-size: 0.5rem;
   }
 }
 </style>
