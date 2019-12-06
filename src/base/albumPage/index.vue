@@ -48,6 +48,7 @@ export default {
       dishId: 0,
       idxId: 0,
       idxComId: 0,
+      albumId: 0,
       title: '',
       imgUrl: '',
       name: ''
@@ -64,13 +65,12 @@ export default {
     this.getParams()
     this.load = true
     this.albumInfo = []
-    let albumId = this.$route.params.albumId
     let idxId = this.$route.params.idxId
     let dishId = this.$route.params.dishId
-    if (albumId) {
+    if (this.albumId) {
       this.title = '歌单'
-      this._getInfo(albumId)
-      this.setAlbumId(albumId)
+      this._getInfo(this.albumId)
+      this.setAlbumId(this.albumId)
       return
     }
     if (idxId || idxId === 0) {
@@ -86,15 +86,15 @@ export default {
     }
   },
   activated () {
-    if (this.albumId !== this.$route.params.albumId) {
+    if (this.lastAlbumId !== this.$route.params.albumId) {
       this.load = true
       this.getParams()
-      this._getInfo(this.$route.params.albumId)
-      this.setAlbumId(this.$route.params.albumId)
+      this._getInfo(this.albumId)
+      this.setAlbumId(this.albumId)
     }
   },
   computed: {
-    ...mapGetters({ audioSong: 'AUDIO_ING_SONG', albumId: 'ALBUM_ID' })
+    ...mapGetters({ audioSong: 'AUDIO_ING_SONG', lastAlbumId: 'ALBUM_ID' })
   },
   methods: {
     ...mapMutations({ setAlbumId: 'SET_USING_ALBUM_ID' }),
@@ -152,16 +152,17 @@ export default {
     },
     setAudioList (item, index) {
       this.selectPlay({
-        list: this.albumInfo.tracks,
+        list: this.albumInfo.tracks || this.albumInfo.songs,
         index
       })
     },
     startPlay () {
       this.startPlayAll({
-        list: this.albumInfo.tracks
+        list: this.albumInfo.tracks || this.albumInfo.songs
       })
     },
     getParams () {
+      this.albumId = +this.$route.params.albumId
       this.name = this.$route.params.name
       this.imgUrl = this.$route.params.imgUrl
     },

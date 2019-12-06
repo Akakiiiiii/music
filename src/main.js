@@ -5,6 +5,7 @@ import store from './store'
 import fastclick from 'fastclick'
 import VueLazyload from 'vue-lazyload'
 import topTip from '@/components/top-tip'
+import smoothscroll from 'smoothscroll-polyfill'
 import {
   Search,
   ActionSheet,
@@ -20,6 +21,8 @@ import {
 
 import 'styles/reset.css'
 import 'styles/border.css'
+
+smoothscroll.polyfill()
 
 fastclick.attach(document.body)
 // import ""

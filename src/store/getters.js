@@ -1,9 +1,3 @@
-/*
- * @Author: 李浩栋
- * @Begin: 2019-08-24 11:44:49
- * @Update: 2019-09-15 12:29:49
- * @Update log: 更新日志
- */
 const getters = {
   LOGIN_PAGE: state => state.loginPage,
   ICON_SUN: state => state.icontaiyang,

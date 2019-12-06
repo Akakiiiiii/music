@@ -1,71 +1,66 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-12 13:02:20
- * @Update: 2019-11-07 12:05:00
- * @Update log: 点击歌单中的某一项，将歌单列表信息传入vuex，用来展示歌曲列表，
- *              点击的index 用列表[index]来设置当前要播放的歌曲
- -->
 <template>
   <div class="audioPage">
-    <div class="mask" v-show="isFull"></div>
-    <div class="full pd23" v-show="isFull">
-      <audio-nav class="color" height="0" @returnPage="returnPage">
+    <div class="mask"
+         v-show="isFull"></div>
+    <div class="full pd23"
+         v-show="isFull">
+      <audio-nav class="color"
+                 height="0"
+                 @returnPage="returnPage">
         <div>
           <p class="title">{{name}}</p>
           <p class="text">
-            <span class="art" v-for="(item, index) in artist" :key="index">{{item.name}}</span>
+            <span class="art"
+                  v-for="(item, index) in artist"
+                  :key="index">{{item.name}}</span>
           </p>
         </div>
       </audio-nav>
-      <playing :imgUrl="imgUrl" v-show="playingShow" @click.native="setPlayingShow(false)"></playing>
-      <lyric-page
-        :lyricArray="ruleLyric"
-        :nowLyricIndex="nowLyricIndex"
-        ref="lyric"
-        :noLyric="noLyric"
-        :noLyricText="noLyricText"
-        v-show="!playingShow"
-        @click.native="setPlayingShow(true)"
-      ></lyric-page>
-      <play-icons :isLike="isLike" @update_isLike="update_isLike"></play-icons>
-      <bar :allTime="allTime" :time="playTime" :width="progressWidth" @time="changeTime"></bar>
-      <function-button
-        @play="toggle"
-        @prev="prevSong"
-        @next="nextSong"
-        @changeMode="changeMode"
-        :mode="mode"
-        @showAudioList="showAudioList"
-      ></function-button>
+      <playing :imgUrl="imgUrl"
+               v-show="playingShow"
+               @click.native="setPlayingShow(false)"></playing>
+      <lyric-page :lyricArray="ruleLyric"
+                  :nowLyricIndex="nowLyricIndex"
+                  ref="lyric"
+                  :noLyric="noLyric"
+                  :noLyricText="noLyricText"
+                  v-show="!playingShow"
+                  @click.native="setPlayingShow(true)"></lyric-page>
+      <play-icons :isLike="isLike"
+                  @update_isLike="update_isLike"></play-icons>
+      <bar :allTime="allTime"
+           :time="playTime"
+           :width="progressWidth"
+           @time="changeTime"></bar>
+      <function-button @play="toggle"
+                       @prev="prevSong"
+                       @next="nextSong"
+                       @changeMode="changeMode"
+                       :mode="mode"
+                       @showAudioList="showAudioList"></function-button>
     </div>
-    <small-audio
-      v-show="!isFull"
-      :imgUrl="imgUrl"
-      @returnFull="returnFull"
-      @play="toggle"
-      @changeMode="changeMode"
-      @showAudioList="showAudioList"
-      :name="name"
-      :artist="artist"
-      :mode="mode"
-      :lyric="nowLyric"
-    ></small-audio>
-    <audio-list
-      :isShowAudioList="isShowAudioList"
-      @showAudioList="showAudioList"
-      :num="playList.length"
-      :mode="mode"
-      @changeMode="changeMode"
-    ></audio-list>
-    <audio
-      :src="url"
-      ref="audio"
-      autoplay
-      @canplay="ready"
-      @error="error"
-      preload="auto"
-      @ended="end"
-    ></audio>
+    <small-audio v-show="!isFull"
+                 :imgUrl="imgUrl"
+                 @returnFull="returnFull"
+                 @play="toggle"
+                 @changeMode="changeMode"
+                 @showAudioList="showAudioList"
+                 :name="name"
+                 :artist="artist"
+                 :mode="mode"
+                 :lyric="nowLyric"></small-audio>
+    <audio-list :isShowAudioList="isShowAudioList"
+                @showAudioList="showAudioList"
+                :num="playList.length"
+                :mode="mode"
+                @changeMode="changeMode"></audio-list>
+    <audio :src="url"
+           ref="audio"
+           autoplay
+           @canplay="ready"
+           @error="error"
+           preload="auto"
+           @ended="end"></audio>
   </div>
 </template>
 
@@ -104,7 +99,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ audioSong: 'AUDIO_ING_SONG',
+    ...mapGetters({
+      audioSong: 'AUDIO_ING_SONG',
       state: 'PLAY_STATE',
       index: 'AUDIO_ING_INDEX',
       list: 'AUDIO_LIST',
@@ -112,7 +108,8 @@ export default {
       mode: 'MODE',
       playList: 'PLAY_LIST',
       offsetLyric: 'OFFSET_LYRIC',
-      playingShow: 'PLAYING_SHOW' })
+      playingShow: 'PLAYING_SHOW'
+    })
   },
   filters: {
     setName: function (val) {
@@ -237,7 +234,6 @@ export default {
      * 显示歌曲列表
      */
     showAudioList () {
-      console.log('列表信息')
       this.isShowAudioList = !this.isShowAudioList
     },
     /**
@@ -259,9 +255,7 @@ export default {
             console.log(err)
             // 不能播放的时候选择下一首进行播放
             this.canSong = false
-            this.readySong = true
             this.nextSong()
-            this.readySong = true
           }
         })
     },
@@ -286,6 +280,7 @@ export default {
     changeToObject (str) {
       const words = str.split(']')[1]
       // 这个正则返回时间信息
+      // str.split(']')[0].split('[')[1] // 不用正则匹配这样子做也可以
       const reg = /\w{0,}:\w{0,}.\w{0,}/g
       let timeArray = reg.exec(str)
       if (!timeArray) {
@@ -380,9 +375,6 @@ export default {
      * 下一首歌曲切换
      */
     nextSong () {
-      if (!this.readySong) {
-        return
-      }
       let nowIndex = this.index + 1
       if (nowIndex === this.list.length) {
         nowIndex = 0
@@ -414,7 +406,7 @@ export default {
      * 当在资源加载期间发生错误时
      */
     error () {
-      this.readySong = true
+      this.readySong = false
     },
     /**
      * 当歌曲播放完成之后
@@ -450,6 +442,7 @@ export default {
      * 设置当前播放时长
      */
     setTime () {
+      // 后续要设置节流
       // 首先我们计算到当前的播放时间
       const audio = this.$refs.audio
       let minutes = Math.floor(audio.currentTime / 60)
@@ -534,7 +527,8 @@ export default {
       setFull: 'SET_FULL_SCREEN',
       setMode: 'SET_AUDIO_MODE',
       setPlayList: 'SET_PLAY_LIST',
-      setPlayingShow: 'SET_PLAYING_SHOW' })
+      setPlayingShow: 'SET_PLAYING_SHOW'
+    })
   },
   components: {
     audioNav,

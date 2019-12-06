@@ -1,24 +1,17 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-16 13:26:47
- * @Update: 2019-10-11 11:39:10
- * @Update log: 更新日志
- -->
 <template>
-  <div class="wrapper">
-    <div class="full" v-if="noLyric">{{noLyricText}}</div>
+  <div class="wrapper"
+       ref="lyric">
+    <div class="full"
+         v-if="noLyric">{{noLyricText}}</div>
     <ul :style="{marginTop: marginTop}">
-      <li
-        v-for="(item, index) in lyricArray"
-        :key="index"
-        :class="{active: index === nowLyricIndex}"
-      >{{ item | setWords }}</li>
+      <li v-for="(item, index) in lyricArray"
+          :key="index"
+          :class="{active: index === nowLyricIndex}">{{ item | setWords }}</li>
     </ul>
   </div>
 </template>
 
 <script>
-const midHeight = 3.5
 export default {
   name: '',
   props: {
@@ -53,12 +46,14 @@ export default {
       // 这里求出中线的位置为 8.3 rem
       // 通过 歌词容器的高度 / 2 - 每个 li 的高度 / 2
       // 每次移动是移动一行歌词的高度，一行歌词高度是 0.6 rem
-      let top = midHeight - index * 0.6
-      if (top > 0) {
-        // top 不能为正数
-        top = 0
-      }
-      this.marginTop = top + 'rem'
+      let top = index * 0.6 * 52.5
+      // this.marginTop = top + 'rem'
+      this.$refs.lyric.scroll({
+        top,
+        left: 0,
+        behavior: 'smooth' //  smooth(平滑滚动),instant(瞬间滚动),默认auto
+      })
+      console.log(this.$refs.lyric.scrollTop)
     }
   }
 }
@@ -72,10 +67,11 @@ export default {
   // box-sizing: border-box;
   margin: 0.6rem 0;
   color: #ccc;
-  overflow: hidden;
+  overflow: scroll;
   ul {
     margin: 0;
     padding: 0;
+    padding-top: 3.5rem;
     list-style: none;
     text-align: center;
     /* ul元素的margin-top值变化，在0.7秒内完成 */

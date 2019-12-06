@@ -1,18 +1,17 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-21 14:37:20
- * @Update: 2019-11-07 12:02:35
- * @Update log: 更新日志
- -->
 <template>
   <div @click.stop>
-    <div class="mask" v-show="isShowAudioList" @click="showAudioList"></div>
-    <transition name="list-show" mode="out-in">
-      <div class="audio-list pd23" v-show="isShowAudioList">
+    <div class="mask"
+         v-show="isShowAudioList"
+         @click="showAudioList"></div>
+    <transition name="list-show"
+                mode="out-in">
+      <div class="audio-list pd23"
+           v-show="isShowAudioList">
         <div class="list-title border-bottom">
           <div class="left">
             <span @click="changeMode">
-              <i class="audio" :class="[modeClass]"></i>
+              <i class="audio"
+                 :class="[modeClass]"></i>
               <span>{{ modeText }}</span>
               <span class="list-num">({{ num }})</span>
             </span>
@@ -28,20 +27,19 @@
           </div>
         </div>
         <ul class="scroll">
-          <li
-            class="list-item"
-            v-for="(item, index) in audioList"
-            :key="index"
-            @click="audioThis(item, index)"
-            :class="isActive(item)"
-          >
+          <li class="list-item"
+              v-for="(item, index) in audioList"
+              :key="index"
+              @click="audioThis(item, index)"
+              :class="item.id === audioIng.id?'active':''">
             <i class="audio audiovolume"></i>
             <div class="info">
               <span class="name">
                 <i>{{item.name}}</i>
               </span>
               <span class="artist">
-                <i v-for="(item, index) in artist(item)" :key="index">{{ item.name }}</i>
+                <i v-for="(item, index) in artist(item)"
+                   :key="index">{{ item.name }}</i>
               </span>
             </div>
             <!-- 删除此项歌曲 -->
