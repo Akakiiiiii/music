@@ -12,6 +12,7 @@
 </template>
 
 <script>
+const REM = document.body.clientWidth * 0.14
 export default {
   name: '',
   props: {
@@ -46,14 +47,13 @@ export default {
       // 这里求出中线的位置为 8.3 rem
       // 通过 歌词容器的高度 / 2 - 每个 li 的高度 / 2
       // 每次移动是移动一行歌词的高度，一行歌词高度是 0.6 rem
-      let top = index * 0.6 * 52.5
+      let top = index * 0.6 * REM
       // this.marginTop = top + 'rem'
       this.$refs.lyric.scroll({
         top,
         left: 0,
         behavior: 'smooth' //  smooth(平滑滚动),instant(瞬间滚动),默认auto
       })
-      console.log(this.$refs.lyric.scrollTop)
     }
   }
 }

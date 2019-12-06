@@ -1,13 +1,10 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-14 17:51:26
- * @Update: 2019-11-07 12:10:02
- * @Update log: 更新日志
- -->
 <template>
-  <div class="bottom-audio border-top pd23" @click="returnFull">
-    <div class="img-info" ref="circle">
-      <img :src="imgUrl" alt />
+  <div class="bottom-audio border-top pd23"
+       @click="returnFull">
+    <div class="img-info"
+         ref="circle">
+      <img :src="imgUrl"
+           alt />
     </div>
     <div class="con-info">
       <p class="name">{{name}}</p>
@@ -15,13 +12,12 @@
     </div>
     <div class="button">
       <span class="circle">
-        <i
-          class="audio"
-          @click.stop="play"
-          :class="{audiozantingtingzhi: isPlay, audiobofang2: !isPlay}"
-        ></i>
+        <i class="audio"
+           @click.stop="play"
+           :class="{audiozantingtingzhi: isPlay, audiobofang2: !isPlay}"></i>
       </span>
-      <i class="audio audioliebiao" @click.stop="showAudioList"></i>
+      <i class="audio audioliebiao"
+         @click.stop="showAudioList"></i>
     </div>
   </div>
 </template>
@@ -122,7 +118,8 @@ export default {
       .ellipsis();
     }
     .lrc {
-      font-size: 0.2rem;
+      color: #d3d7d4;
+      font-size: 0.18rem;
       line-height: 1.5;
       .ellipsis();
     }

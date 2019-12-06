@@ -117,9 +117,10 @@
     </div>
     <!-- 这里将列表进行包裹统一的通过 load 属性进行判断是否展示 -->
     <div class="list-info"
-         v-show="!load"
-         :style="{ marginTop: top}">
-      <slot></slot>
+         v-bind:style="[paddingHeight,{'marginTop': top}]"
+         v-show="!load">
+      <slot>
+      </slot>
     </div>
     <!-- 页面 loading 组件 -->
     <page-loading v-show="load"></page-loading>
@@ -129,6 +130,7 @@
 <script>
 import globalNav from 'base/generalNav'
 import pageLoading from 'base/pageLoading'
+import { mapGetters } from 'vuex'
 import api from 'api'
 
 const setNum = function (val) {
@@ -285,6 +287,7 @@ export default {
   },
   // 对日期信息提取展示
   computed: {
+    ...mapGetters(['AUDIO_LIST']),
     /**
      * 返回日
      */
@@ -300,6 +303,9 @@ export default {
       return new Date().getMonth() + 1 < 10
         ? '0' + (new Date().getMonth() + 1)
         : new Date().getMonth() + 1
+    },
+    paddingHeight () {
+      return this.AUDIO_LIST.length ? { 'paddingBottom': '1rem' } : {}
     }
   },
   methods: {

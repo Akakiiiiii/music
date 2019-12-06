@@ -1,10 +1,3 @@
-/*
- * @Author: 李浩栋
- * @Begin: 2019-09-21 15:14:40
- * @Update: 2019-11-24 12:59:18
- * @Update log: 更新日志
- */
-
 import {
   mapGetters
 } from 'vuex'

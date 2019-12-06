@@ -48,12 +48,14 @@
                  :name="name"
                  :artist="artist"
                  :mode="mode"
-                 :lyric="nowLyric"></small-audio>
+                 :lyric="nowLyric">
+    </small-audio>
     <audio-list :isShowAudioList="isShowAudioList"
                 @showAudioList="showAudioList"
                 :num="playList.length"
                 :mode="mode"
-                @changeMode="changeMode"></audio-list>
+                @changeMode="changeMode"
+                @empty="empty"></audio-list>
     <audio :src="url"
            ref="audio"
            autoplay
@@ -74,6 +76,7 @@ import functionButton from './components/functionButton'
 import smallAudio from './components/small'
 import lyricPage from './components/lyricPage'
 import audioList from './components/audioList'
+import { getRandomArrayElements } from 'utils/getRandomArrayElements'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: '',
@@ -145,6 +148,12 @@ export default {
               ? val.album.artist.img1v1Url : val.coverUrl ? val.coverUrl : ''
         this.name = this.setName(val.name)
       })
+    },
+    'playList.length': function (newV) {
+      console.log('wacth')
+      if (!newV) {
+        this.isShowAudioList = false
+      }
     }
   },
   methods: {
@@ -333,21 +342,8 @@ export default {
     /**
      * 获取随机值
      */
-    getRandomIndex (min, max) {
-      return Math.floor(Math.random() * (max - min + 1) + min)
-    },
-    /**
-     * 打乱一个数组
-     */
     shuffle (arr) {
-      const _arr = arr.slice()
-      for (let i = 0; i < _arr.length; i++) {
-        const j = this.getRandomIndex(0, i)
-        const t = _arr[i]
-        _arr[i] = _arr[j]
-        _arr[j] = t
-      }
-      return _arr
+      return getRandomArrayElements(arr, arr.length)
     },
     /**
      * 当改变进度条时改变歌曲播放时间
@@ -521,13 +517,19 @@ export default {
     returnFull () {
       this.setFull(true)
     },
+    // 清空播放列表
+    empty () {
+      this.setPlayList([])
+      this.setAudioList([])
+    },
     ...mapMutations({
       setState: 'SET_PLAY_SATE',
       setIndex: 'SET_AUDIO_INDEX',
       setFull: 'SET_FULL_SCREEN',
       setMode: 'SET_AUDIO_MODE',
       setPlayList: 'SET_PLAY_LIST',
-      setPlayingShow: 'SET_PLAYING_SHOW'
+      setPlayingShow: 'SET_PLAYING_SHOW',
+      setAudioList: 'SET_AUDIO_LIST'
     })
   },
   components: {

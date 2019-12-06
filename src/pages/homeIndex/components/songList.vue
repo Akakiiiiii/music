@@ -1,11 +1,6 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-07-30 16:42:30
- * @Update: 2019-11-14 13:45:17
- * @Update log: 更新日志
- -->
 <template>
-  <div class="container pd13" @click.stop>
+  <div class="container pd13"
+       @click.stop>
     <div class="wrapper-title">
       <div class="left-title">
         <i class="home iconarrow"></i>
@@ -14,13 +9,15 @@
       </div>
       <div class="right-title">
         <!-- 点击添加按钮显示新建歌单 -->
-        <i class="home iconincrease" @click="showAddNewPlayList"></i>
+        <i class="home iconincrease"
+           @click="showAddNewPlayList"></i>
         <i class="home icondiandiandian"></i>
       </div>
     </div>
     <ul class="song-group">
       <!-- 没登录的情况下会有我喜欢的音乐列表项显示 -->
-      <li class="song-list" v-if="!myLoveList.length">
+      <li class="song-list"
+          v-if="!myLoveList.length">
         <div class="list-cover">
           <i class="home iconxin"></i>
         </div>
@@ -35,8 +32,12 @@
         </div>
       </li>
       <!-- 登录后的歌单项显示 -->
-      <li class="song-list" v-for="(item, index) in myLoveList" :key="index">
-        <a class="cover" style="width:70%;" @click="goAlbumPage(item.id)"></a>
+      <li class="song-list"
+          v-for="(item, index) in myLoveList"
+          :key="index">
+        <a class="cover"
+           style="width:70%;"
+           @click="goAlbumPage(item.id)"></a>
         <div class="list-img">
           <img :src="item.coverImgUrl + '?param=100y100'" />
         </div>
@@ -45,32 +46,36 @@
           <p class="list-num">{{item.trackCount}}首</p>
         </div>
         <div class="heart-module">
-          <span class="heart-text" @click.stop="heartMode(item.id)">
+          <span class="heart-text"
+                @click.stop="heartMode(item.id)">
             <i class="home iconxintiao"></i>心动模式
           </span>
         </div>
       </li>
       <!-- Duplicate keys detected: '0'. This may cause an update error -->
       <!-- key 值重复 -->
-      <li class="song-list" v-for="(item, index) in createList" :key="index + 1">
-        <a class="cover" @click="goAlbumPage(item.id)"></a>
+      <li class="song-list"
+          v-for="(item, index) in createList"
+          :key="index + 1">
+        <a class="cover"
+           @click="goAlbumPage(item.id)"></a>
         <div class="list-img">
           <img :src="item.coverImgUrl + '?param=100y100'" />
-          <i class="home iconsuo" v-show="item.privacy"></i>
+          <i class="home iconsuo"
+             v-show="item.privacy"></i>
         </div>
         <div class="list-info">
           <p class="list-title">{{ item.name}}</p>
           <p class="list-num">{{item.trackCount}}首</p>
         </div>
         <div class="heart">
-          <i
-            class="home icondiandiandian"
-            @click.stop="showSlider(item.name, item.id, item.subscribed)"
-          ></i>
+          <i class="home icondiandiandian"
+             @click.stop="showSlider(item.name, item.id, item.subscribed)"></i>
         </div>
       </li>
     </ul>
-    <div class="wrapper-title" v-if="index.favoritesNum">
+    <div class="wrapper-title"
+         v-if="index.favoritesNum">
       <div class="left-title">
         <i class="home iconarrow"></i>
         <span class="title">收藏的歌单</span>
@@ -83,8 +88,11 @@
     </div>
     <!-- 收藏的歌单 -->
     <ul class="song-group">
-      <li class="song-list" v-for="(item, index) in favoritesList" :key="index">
-        <a class="cover" @click="goAlbumPage(item.id)"></a>
+      <li class="song-list"
+          v-for="(item, index) in favoritesList"
+          :key="index">
+        <a class="cover"
+           @click="goAlbumPage(item.id)"></a>
         <div class="list-img">
           <img :src="item.coverImgUrl + '?param=100y100'" />
         </div>
@@ -96,10 +104,8 @@
           </p>
         </div>
         <div class="heart">
-          <i
-            class="home icondiandiandian"
-            @click.stop="showSlider(item.name, item.id, item.subscribed)"
-          ></i>
+          <i class="home icondiandiandian"
+             @click.stop="showSlider(item.name, item.id, item.subscribed)"></i>
         </div>
       </li>
     </ul>
@@ -161,7 +167,15 @@ export default {
      * 跳转到歌单详情页面
      */
     goAlbumPage (id) {
-      this.$router.push({ name: 'albumPage', params: { albumId: id } })
+      this.$router.push({
+        name: 'albumPage',
+        params:
+        {
+          albumId: id,
+          imgUrl: this.favoritesList[0].coverImgUrl,
+          name: this.favoritesList[0].name
+        }
+      })
     },
     /**
      * 返回一个随机数

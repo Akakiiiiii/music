@@ -1,22 +1,17 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-07-30 16:42:30
- * @Update: 2019-10-12 13:17:54
- * @Update log: 更新日志
- -->
 <template>
   <div class="container">
     <home-icons></home-icons>
     <home-list :num="homeListNum"></home-list>
     <div class="split"></div>
-    <song-list ref="songList" :index="songListNum" @showSlider="showSlider" @heartMode="_heartMode"></song-list>
-    <slider
-      ref="slider"
-      :title="title"
-      :id="id"
-      :homeFavoritelistSlider="homeFavoritelistSlider"
-      :homePlaylistSlider="homePlaylistSlider"
-    ></slider>
+    <song-list ref="songList"
+               :index="songListNum"
+               @showSlider="showSlider"
+               @heartMode="_heartMode"></song-list>
+    <slider ref="slider"
+            :title="title"
+            :id="id"
+            :homeFavoritelistSlider="homeFavoritelistSlider"
+            :homePlaylistSlider="homePlaylistSlider"></slider>
   </div>
 </template>
 

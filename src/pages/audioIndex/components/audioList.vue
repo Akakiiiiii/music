@@ -2,7 +2,7 @@
   <div @click.stop>
     <div class="mask"
          v-show="isShowAudioList"
-         @click="showAudioList"></div>
+         @click="$emit('showAudioList')"></div>
     <transition name="list-show"
                 mode="out-in">
       <div class="audio-list pd23"
@@ -17,11 +17,11 @@
             </span>
           </div>
           <div class="right">
-            <span>
+            <span class="border-right pd23">
               <i class="audio audiowenjianjia"></i>
               收藏全部
             </span>
-            <span>
+            <span class="pl23">
               <i class="audio audiolajitong"></i>
             </span>
           </div>
@@ -86,12 +86,6 @@ export default {
     })
   },
   methods: {
-    isActive (item) {
-      if (item.id === this.audioIng.id) {
-        return 'active'
-      }
-      return ''
-    },
     artist (artist) {
       if (artist.artists) {
         return artist.artists
