@@ -76,7 +76,7 @@ import { getRandomArrayElements } from 'utils/getRandomArrayElements'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  name: '',
+  name: 'audioIndex',
   data () {
     return {
       url: '',
@@ -554,6 +554,7 @@ export default {
   z-index: 10;
   background-color: #7f8c8d;
   .color {
+    padding-top: 0.2rem;
     color: #fff;
   }
   .title-wrap {

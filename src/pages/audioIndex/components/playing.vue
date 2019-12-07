@@ -1,15 +1,13 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-13 12:44:14
- * @Update: 2019-10-11 11:40:19
- * @Update log: 更新日志
- -->
 <template>
   <div class="wrapper">
-    <div class="great" :class="{rotate: !isPlay}"></div>
-    <div class="circle-bg" ref="circle">
-      <div class="song-img">
-        <img :src="imgUrl + '?param=200y200'" alt />
+    <div class="great"
+         :class="{rotate: !isPlay}"></div>
+    <div class="circle-bg"
+         ref="circle">
+      <div class="song-img"
+           :class="[isPlay?'song-img-animation':'']">
+        <img :src="imgUrl + '?param=200y200'"
+             alt />
       </div>
     </div>
   </div>
@@ -25,7 +23,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ isPlay: 'PLAY_STATE' })
+    ...mapGetters({ isPlay: 'PLAY_STATE' }),
+    lastRotate () {
+      console.log(this.$refs)
+      return this.$refs
+    }
+  },
+  mounted () {
+    if (!this.isPlay) {
+      this.$refs.circle.style.animationPlayState = 'paused'
+    }
   },
   watch: {
     isPlay: function (val) {
@@ -34,6 +41,11 @@ export default {
       } else {
         this.$refs.circle.style.animationPlayState = 'paused'
       }
+    }
+  },
+  methods: {
+    setRotate () {
+      console.log('11')
     }
   }
 }
@@ -90,9 +102,6 @@ export default {
   }
 }
 @keyframes rotating {
-  0% {
-    transform: rotate(0deg);
-  }
   100% {
     transform: rotate(360deg);
   }

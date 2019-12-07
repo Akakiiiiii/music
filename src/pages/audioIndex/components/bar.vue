@@ -1,21 +1,16 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-13 14:01:18
- * @Update: 2019-11-05 13:59:06
- * @Update log: 更新日志
- -->
 <template>
   <div class="bar">
     <span>{{ time }}</span>
-    <div class="bar-bg" ref="barBg" @touchstart.prevent="clickBg">
-      <div class="bar-layer" :style="{width:length}"></div>
-      <div
-        class="point"
-        :style="{left:length}"
-        @touchstart.prevent="start"
-        @touchmove.prevent="move"
-        @touchend="end"
-      ></div>
+    <div class="bar-bg"
+         ref="barBg"
+         @touchstart.prevent="clickBg">
+      <div class="bar-layer"
+           :style="{width:length}"></div>
+      <div class="point"
+           :style="{left:length}"
+           @touchstart.prevent="start"
+           @touchmove.prevent="move"
+           @touchend="end"></div>
     </div>
     <span>{{ allTime | setTime }}</span>
   </div>
@@ -114,7 +109,7 @@ export default {
 
 <style lang='less' scoped>
 .bar {
-  margin: 0.6rem 0;
+  margin: 0.5rem 0;
   display: flex;
   align-items: center;
   color: #bdc3c7;

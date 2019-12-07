@@ -26,6 +26,7 @@ export default {
   data () {
     return {
       textWidth: 0,
+      n: 1,
       showFake: false,
       textDom: null,
       wrapDom: null,
@@ -34,10 +35,7 @@ export default {
   },
   mounted () {
     setTimeout(() => {
-      console.log(this.$refs)
-      console.log(this.$refs.songName.offsetWidth)
       this.textDom = this.$refs.songName
-      console.log(this.textDom)
       this.jugShowFake()
     }, 100)
   },
@@ -53,17 +51,17 @@ export default {
     },
     scrollText () {
       this.timer = setInterval(() => {
-        if (this.wrapDom.scrollLeft <= this.textWidth) {
-          this.wrapDom.scrollLeft++
+        if (this.wrapDom.scrollLeft <= this.textWidth + 4) {
+          this.wrapDom.scrollBy(this.n, 0)
         } else {
-          this.wrapDom.scrollLeft = 0
+          this.wrapDom.scrollTo(0, 0)
         }
-      }, 50)
-    },
-    destroyed () {
-      this.wrapDom.scrollLeft = 0
-      this.timer = null
+      }, 35)
     }
+  },
+  beforeDestroy () {
+    console.log('beforeD')
+    clearInterval(this.timer)
   }
 }
 </script>
@@ -73,6 +71,7 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   width: 5.3rem;
+  margin-right: 0.2rem;
 }
 .scrollWrap {
   width: 100%;
@@ -81,10 +80,10 @@ export default {
 }
 .title {
   display: inline;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.35rem;
   color: #fff;
-  padding-right: 0.5rem;
+  padding-right: 2rem;
 }
 .text {
   font-size: 0.2rem;
