@@ -42,6 +42,7 @@
                  @showAudioList="showAudioList"
                  :name="name"
                  :artist="artist"
+                 :albumName="albumName"
                  :mode="mode"
                  :lyric="nowLyric">
     </small-audio>
@@ -85,6 +86,7 @@ export default {
       progressWidth: 0,
       artist: [],
       imgUrl: '',
+      albumName: '',
       readySong: false,
       canSong: true,
       name: '',
@@ -135,6 +137,7 @@ export default {
         } else {
           this._checkSong(val.id)
         }
+        this.albumName = val.al.name
         this.allTime = val.duration ? val.duration : val.dt ? val.dt : ''
         this.artist = val.album ? val.album.artists : val.ar ? val.ar : ''
         this.imgUrl = val.album
@@ -460,7 +463,8 @@ export default {
       let barLength = audio.currentTime / audio.duration * 100
       this.setProgress(barLength)
       // 如果有歌词的话就设置歌词偏移
-      if (!this.nowLyric) {
+      if (!this.noLyric) {
+        console.log('设置时间')
         const playTime = audio.currentTime + this.offsetLyric
         const index = this.getCurrentIndex(playTime, this.ruleLyric)
         this.nowLyricIndex = index

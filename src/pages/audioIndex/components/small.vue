@@ -8,7 +8,19 @@
     </div>
     <div class="con-info">
       <p class="name">{{name}}</p>
-      <p class="lrc">{{ lyric | emptyCon }}</p>
+      <p class="lrc">
+        <span class="artist"
+              v-for="(item, index) in artist"
+              :key="index"
+              v-show="!lyric">
+          {{ item.name }}
+        </span>
+        <span class="album-name"
+              v-show="!lyric">{{ albumName }}</span>
+        <span v-show="lyric">
+          {{ lyric }}
+        </span>
+      </p>
     </div>
     <div class="button">
       <span class="circle">
@@ -27,7 +39,7 @@ import { audio } from 'mixins/Mixins'
 import { mapGetters } from 'vuex'
 export default {
   mixins: [audio],
-  name: '',
+  name: 'smallAudio',
   props: {
     imgUrl: {
       type: String
@@ -35,19 +47,14 @@ export default {
     name: {
       type: String
     },
+    albumName: {
+      type: String
+    },
     lyric: {
       type: String
     },
     artist: {
       type: [Array, String]
-    }
-  },
-  filters: {
-    emptyCon: function (val) {
-      if (!val) {
-        return '-'
-      }
-      return val
     }
   },
   computed: {
@@ -122,8 +129,22 @@ export default {
       font-size: 0.18rem;
       line-height: 1.5;
       .ellipsis();
+      .artist {
+        &::after {
+          content: "/";
+        }
+        &:last-child::after {
+          content: "";
+        }
+      }
+      .album-name {
+        &::before {
+          content: "-";
+        }
+      }
     }
   }
+
   .button {
     .audio {
       box-sizing: border-box;
@@ -138,19 +159,20 @@ export default {
       height: 0.4rem;
       border-radius: 50%;
       margin-left: 0.1rem;
+      // margin-right: 0.1rem;
       .audio {
         margin-left: 0;
         font-size: 0.3rem;
       }
     }
   }
-}
-@keyframes rotating {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+  @keyframes rotating {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }
 </style>
