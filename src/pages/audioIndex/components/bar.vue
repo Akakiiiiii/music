@@ -42,8 +42,7 @@ export default {
   watch: {
     width: function (val) {
       if (val && !this.touch.state) {
-        val = val + '%'
-        this.length = val
+        this.length = val + '%'
       }
     }
   },
@@ -58,12 +57,11 @@ export default {
       this.touch.width = this.$refs.barBg.clientWidth
     },
     clickBg (e) {
+      console.log(this.$refs.barBg.offsetLeft)
       this.touch.width = this.$refs.barBg.clientWidth
       const left = this.$refs.barBg.offsetLeft
       this.touch.endX = e.changedTouches[0].pageX - left
       const offsetWidth = this.touch.endX / this.touch.width * 100
-      console.log(offsetWidth)
-
       this._changeWidth(offsetWidth)
       this.$emit('time', offsetWidth, isNaN(this.index) ? '' : this.index)
     },

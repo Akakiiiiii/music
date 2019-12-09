@@ -459,14 +459,16 @@ export default {
       // // 进度条的长度计算
       let barLength = audio.currentTime / audio.duration * 100
       this.setProgress(barLength)
-      // 设置歌词偏移
-      const playTime = audio.currentTime + this.offsetLyric
-      const index = this.getCurrentIndex(playTime, this.ruleLyric)
-      this.nowLyricIndex = index
-      // 设置歌词显示
-      this.showLyric(index, this.ruleLyric)
-      // 设置歌词页面的显示规则,传入当前歌词索引信息
-      this.$refs.lyric.setCurrent(this.nowLyricIndex)
+      // 如果有歌词的话就设置歌词偏移
+      if (!this.nowLyric) {
+        const playTime = audio.currentTime + this.offsetLyric
+        const index = this.getCurrentIndex(playTime, this.ruleLyric)
+        this.nowLyricIndex = index
+        // 设置歌词显示
+        this.showLyric(index, this.ruleLyric)
+        // 设置歌词页面的显示规则,传入当前歌词索引信息
+        this.$refs.lyric.setCurrent(this.nowLyricIndex)
+      }
     },
     /**
      * 获取当前歌词索引

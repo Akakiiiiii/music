@@ -3,7 +3,8 @@
        ref="lyric">
     <div class="full"
          v-if="noLyric">{{noLyricText}}</div>
-    <ul :style="{marginTop: marginTop}">
+    <ul :style="{marginTop: marginTop}"
+        v-if="!noLyric">
       <li v-for="(item, index) in lyricArray"
           :key="index"
           :class="{active: index === nowLyricIndex}">{{ item | setWords }}</li>

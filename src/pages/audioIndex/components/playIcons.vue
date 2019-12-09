@@ -1,16 +1,8 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-13 13:33:12
- * @Update: 2019-10-24 09:42:28
- * @Update log: 更新日志
- -->
 <template>
   <div class="wrapper">
-    <i
-      class="audio"
-      @click="changeLikeStatus(audioSong.id)"
-      :class="{audioshoucang: isLike, audioshoucang1:!isLike}"
-    ></i>
+    <i class="audio"
+       @click="changeLikeStatus(audioSong.id)"
+       :class="{audioshoucang: isLike, audioshoucang1:!isLike}"></i>
     <i class="audio audioxiazai"></i>
     <i class="audio audiocaidan"></i>
   </div>
