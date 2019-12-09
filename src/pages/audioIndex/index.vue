@@ -3,7 +3,7 @@
     <div class="mask"
          v-show="isFull"></div>
     <div class="full pd23"
-         v-if="isFull">
+         v-show="isFull">
       <audio-nav class="color"
                  height="0"
                  @returnPage="returnPage">
@@ -127,6 +127,7 @@ export default {
      */
     audioSong: function (val, oldVal) {
       // 查看当前播放歌曲是否已喜欢
+      console.log('当前歌曲已经变化')
       this._getLikeMusicList(val.id)
       if (val.id === oldVal.id) {
         return
@@ -322,11 +323,9 @@ export default {
       let shufflePlayList
       if (mode === 2) {
         shufflePlayList = this.shuffle(this.list)
-      } else {
-        shufflePlayList = this.list
+        this.resetCurrentIndex(shufflePlayList)
+        this.setPlayList(shufflePlayList)
       }
-      this.resetCurrentIndex(shufflePlayList)
-      this.setPlayList(shufflePlayList)
     },
     /**
      * 设置当前播放索引
@@ -464,7 +463,6 @@ export default {
       this.setProgress(barLength)
       // 如果有歌词的话就设置歌词偏移
       if (!this.noLyric) {
-        console.log('设置时间')
         const playTime = audio.currentTime + this.offsetLyric
         const index = this.getCurrentIndex(playTime, this.ruleLyric)
         this.nowLyricIndex = index

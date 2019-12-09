@@ -1,16 +1,17 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-13 13:33:12
- * @Update: 2019-11-07 11:42:11
- * @Update log: 更新日志
- -->
 <template>
   <div class="wrapper">
-    <i class="audio" :class="[modeClass]" @click.self="changeMode"></i>
-    <i class="audio audioxiayishou1" @click.self="prev"></i>
-    <i class="audio" @click="play" :class="{audiobofang1: isPlay, audiobofang: !isPlay}"></i>
-    <i class="audio audioxiayishou" @click.self="next"></i>
-    <i class="audio audioliebiao" @click.self="showAudioList"></i>
+    <i class="audio"
+       :class="[modeClass]"
+       @click.self="changeMode"></i>
+    <i class="audio audioxiayishou1"
+       @click.self="prev"></i>
+    <i class="audio"
+       @click="play"
+       :class="{audiobofang1: isPlay, audiobofang: !isPlay}"></i>
+    <i class="audio audioxiayishou"
+       @click.self="next"></i>
+    <i class="audio audioliebiao"
+       @click.self="showAudioList"></i>
   </div>
 </template>
 

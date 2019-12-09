@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 const REM = document.body.clientWidth * 0.14
 export default {
   name: 'scrollText',
@@ -33,11 +34,18 @@ export default {
       timer: null
     }
   },
-  mounted () {
-    setTimeout(() => {
-      this.textDom = this.$refs.songName
-      this.jugShowFake()
-    }, 100)
+  watch: {
+    isFull (nVal, oVal) {
+      if (nVal) {
+        setTimeout(() => {
+          this.textDom = this.$refs.songName
+          this.jugShowFake()
+        }, 100)
+      } else {
+        console.log('已经清除')
+        clearInterval(this.timer)
+      }
+    }
   },
   methods: {
     jugShowFake () {
@@ -59,9 +67,8 @@ export default {
       }, 35)
     }
   },
-  beforeDestroy () {
-    console.log('beforeD')
-    clearInterval(this.timer)
+  computed: {
+    ...mapGetters({ isFull: 'FULL_SCREEN' })
   }
 }
 </script>

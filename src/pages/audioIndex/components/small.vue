@@ -75,17 +75,6 @@ export default {
       } else {
         this.$refs.circle.style.animationPlayState = 'paused'
       }
-    },
-    lyric: function (val) {
-      let artistName
-      if (!val) {
-        this.artist.forEach(element => {
-          artistName += element.name
-        })
-        val = artistName
-
-        console.log(val)
-      }
     }
   }
 }
