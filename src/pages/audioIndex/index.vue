@@ -276,11 +276,15 @@ export default {
      */
     createLrcArray (lrc) {
       const parts = lrc.split('\n')
-      for (let index = 0; index < parts.length; index++) {
-        const element = parts[index]
-        parts[index] = this.changeToObject(element)
-      }
-      return parts
+      parts.pop()
+      let lyricArray = []
+      parts.forEach((item) => {
+        const temp = this.changeToObject(item)
+        if (temp.words) {
+          lyricArray.push(temp)
+        }
+      })
+      return lyricArray
     },
     /**
      * 根据一行歌词 转换为对象
