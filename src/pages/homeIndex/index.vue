@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <div class="container"
+       :style="[audioList.length?{paddingBottom:'1rem'}:{}]">
     <home-icons></home-icons>
     <home-list :num="homeListNum"></home-list>
     <div class="split"></div>
@@ -132,7 +133,7 @@ export default {
     ...mapActions(['startPlayAll'])
   },
   computed: {
-    ...mapGetters({ loginState: 'LOGIN_STATE' }),
+    ...mapGetters({ loginState: 'LOGIN_STATE', audioList: 'AUDIO_LIST' }),
     ...mapGetters({ accountUid: 'ACCOUNT_UID' })
   },
   activated () {

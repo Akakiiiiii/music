@@ -1,20 +1,14 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-10-01 14:30:50
- * @Update: 2019-10-29 13:07:19
- * @Update log: 可左右滑动的标签导航
- -->
+
 <template>
-  <div class="wrapper pd23" ref="navs">
+  <div class="wrapper pd23"
+       ref="navs">
     <!-- 使用 replace 它不会向 history 添加新记录 -->
-    <router-link
-      class="nav-list"
-      :style="{minWidth}"
-      v-for="(item, index) in list"
-      :key="index"
-      :to="item.path"
-      replace
-    >{{ item.text }}{{item.num | empty}}</router-link>
+    <router-link class="nav-list"
+                 :style="{minWidth}"
+                 v-for="(item, index) in list"
+                 :key="index"
+                 :to="item.path"
+                 replace>{{ item.text }}{{item.num | empty}}</router-link>
   </div>
 </template>
 

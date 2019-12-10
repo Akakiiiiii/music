@@ -1,26 +1,21 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-10-08 11:28:42
- * @Update: 2019-10-08 12:37:13
- * @Update log: 更新日志
- -->
 <template>
   <div>
-    <div class="load" v-show="loading">
+    <div class="load"
+         v-show="loading">
       <page-loading></page-loading>
     </div>
     <div v-show="!loading">
-      <audio-all-title @beginAudioAll="beginAudioAll" :trackCount="trackCount" class="titleMt"></audio-all-title>
-      <song-list
-        v-for="(item, index) in chineseList"
-        :key="index"
-        :songName="item.name"
-        :artists="item.artists"
-        :albumName="item.album.name"
-        :imgUrl="item.album.picUrl"
-        @beginSong="setAudioList(item, index)"
-        :nowSong="item.id === audioSong.id"
-      ></song-list>
+      <audio-all-title @beginAudioAll="beginAudioAll"
+                       :trackCount="trackCount"
+                       class="titleMt"></audio-all-title>
+      <song-list v-for="(item, index) in chineseList"
+                 :key="index"
+                 :songName="item.name"
+                 :artists="item.artists"
+                 :albumName="item.album.name"
+                 :imgUrl="item.album.picUrl"
+                 @beginSong="setAudioList(item, index)"
+                 :nowSong="item.id === audioSong.id"></song-list>
     </div>
   </div>
 </template>

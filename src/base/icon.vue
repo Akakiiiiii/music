@@ -1,6 +1,9 @@
 <template>
-  <div class="icon-list" :class="{width}" @click="linkTo">
-    <div class="icon" :class="{bgcolor}">
+  <div class="icon-list"
+       :class="{width}"
+       @click="linkTo">
+    <div class="icon"
+         :class="{bgcolor}">
       <i :class="icons.icon"></i>
       <slot></slot>
     </div>
@@ -47,7 +50,13 @@ export default {
   align-items: center;
   color: #000;
   .bgcolor {
-    background: linear-gradient(to right, #ff5a4c, #ff1d11);
+    background: linear-gradient(
+      to bottom,
+      rgba(248, 80, 50, 1) 0%,
+      rgba(239, 75, 57, 0.85) 67%,
+      rgba(232, 68, 39, 0.77) 99%,
+      rgba(232, 68, 39, 0.77) 100%
+    );
   }
   .icon {
     width: 0.8rem;

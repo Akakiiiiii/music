@@ -30,11 +30,11 @@
                      tag="i"
                      class="nav iconsousuo ripple"></router-link>
       </div>
-      <login-page-is-show></login-page-is-show>
     </nav>
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
+    <login-page-is-show></login-page-is-show>
   </div>
 </template>
 

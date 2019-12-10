@@ -7,7 +7,9 @@
       <slider-nav :list="list"></slider-nav>
     </div>
     <keep-alive>
-      <router-view></router-view>
+      <div class="list-wrap">
+        <router-view></router-view>
+      </div>
     </keep-alive>
   </div>
 </template>
@@ -62,6 +64,9 @@ export default {
     top: 0;
     z-index: 1;
     background-color: #fff;
+  }
+  .list-wrap {
+    padding-top: 1.9rem;
   }
 }
 </style>

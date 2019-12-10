@@ -1,17 +1,16 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-07-30 16:42:30
- * @Update: 2019-11-14 13:34:02
- * @Update log: 我的页面的列表项
- -->
 <template>
   <div class="container pd13">
     <ul>
-      <li v-for="(item, index) in homeListContext" :key="index" class="list-item">
-        <i class="home" :class="item.icon"></i>
-        <div class="border-bottom wrapper" @click.stop="handleClick(item.text)">
+      <li v-for="(item, index) in homeListContext"
+          :key="index"
+          class="list-item">
+        <i class="home"
+           :class="item.icon"></i>
+        <div class="border-bottom wrapper"
+             @click.stop="handleClick(item.text)">
           <span class="list-content">{{item.text}}</span>
-          <span class="num" ref="homeNum">({{item.num}})</span>
+          <span class="num"
+                ref="homeNum">({{item.num}})</span>
         </div>
       </li>
     </ul>
@@ -29,13 +28,6 @@ export default {
     }
   },
   props: ['num'],
-  mounted () {
-    // 存取props 传过来的数据
-    this.recordNum = this.num.recordNum
-    this.djNum = this.num.djNum
-    // 首先获取到初始化的数据，防止页面坍塌
-    this.homeListContext = homeList()
-  },
   watch: {
     // props 异步请求，初始加载时无法获取到props传过来的值
     num: {
@@ -65,6 +57,11 @@ export default {
     },
     handleClick (name) {
       console.log(name)
+      setTimeout(() => {
+        this.goPage(name)
+      }, 500)
+    },
+    goPage (name) {
       switch (name) {
         case '最近播放':
           this.$router.push('/recently')

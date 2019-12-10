@@ -62,7 +62,7 @@ export default {
 .login-menu {
   // 左侧侧边栏 宽度设置为6rem
   position: absolute;
-  z-index: 99;
+  z-index: 21;
   height: 100vh;
   overflow-y: auto;
   top: 0;

@@ -127,11 +127,11 @@ export default {
      */
     audioSong: function (val, oldVal) {
       // 查看当前播放歌曲是否已喜欢
-      console.log('当前歌曲已经变化')
       this._getLikeMusicList(val.id)
       if (val.id === oldVal.id) {
         return
       }
+      console.log('当前歌曲已经变化')
       this.$nextTick(() => {
         if (val.dj) {
           this._checkSong(val.mainTrackId)
@@ -559,7 +559,7 @@ export default {
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 10;
+  z-index: 20;
   background-color: #7f8c8d;
   .color {
     padding-top: 0.2rem;

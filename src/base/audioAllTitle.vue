@@ -1,11 +1,3 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-28 12:56:39
- * @Update: 2019-09-28 12:56:39
- * @Update log: 播放全部的那一行
- *
- * 使用时传入当前列表有几首歌曲，用来显示
- -->
 <template>
   <div class="title">
     <span>
