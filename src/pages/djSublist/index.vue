@@ -1,15 +1,12 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-10-01 15:08:21
- * @Update: 2019-10-16 13:29:19
- * @Update log: 更新日志
- -->
 <template>
   <div class="dj_sub_list pd23">
     <general-nav @returnPage="returnPage">
       <span class="text">我的电台</span>
     </general-nav>
-    <dj-sublist-card :djSublist="djSublist" :count="count" type="dj" title="我订阅的电台"></dj-sublist-card>
+    <dj-sublist-card :djSublist="djSublist"
+                     :count="count"
+                     type="dj"
+                     title="我订阅的电台"></dj-sublist-card>
   </div>
 </template>
 

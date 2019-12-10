@@ -1,16 +1,16 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-27 12:49:09
- * @Update: 2019-11-14 13:24:43
- * @Update log: 更新日志
- -->
 <template>
   <div>
-    <van-action-sheet v-model="drawer" class="van-ellipsis" :title="title">
+    <van-action-sheet v-model="drawer"
+                      class="van-ellipsis"
+                      :title="title">
       <div>
-        <p v-for="(item, index) in data" :key="index" class="item pd23 border-bottom">
-          <a class="cover" @click="itemHandle(item.text, id)"></a>
-          <i class="slider" :class="item.icon"></i>
+        <p v-for="(item, index) in data"
+           :key="index"
+           class="item pd23 border-bottom">
+          <a class="cover"
+             @click="itemHandle(item.text, id)"></a>
+          <i class="slider"
+             :class="item.icon"></i>
           {{item.text}}
         </p>
       </div>

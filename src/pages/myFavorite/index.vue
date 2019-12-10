@@ -1,27 +1,20 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-10-01 14:23:14
- * @Update: 2019-10-04 12:48:02
- * @Update log: 更新日志
- -->
 <template>
   <div class="my_favorite pd23">
     <general-nav @returnPage="returnPage">
       <span class="text">我的收藏</span>
     </general-nav>
-    <slider-nav :list="list" minWidth="1rem"></slider-nav>
-    <router-view
-      :albumsInfo="albumsInfo"
-      :videosInfo="videosInfo"
-      :columnInfo="columnInfo"
-      :artistsInfo="artistsInfo"
-      :mlogInfo="mlogInfo"
-      :albumsNum="albumsNum"
-      :videosNum="videosNum"
-      :columnNum="columnNum"
-      :artistsNum="artistsNum"
-      :mlogNum="mlogNum"
-    ></router-view>
+    <slider-nav :list="list"
+                minWidth="1.4rem"></slider-nav>
+    <router-view :albumsInfo="albumsInfo"
+                 :videosInfo="videosInfo"
+                 :columnInfo="columnInfo"
+                 :artistsInfo="artistsInfo"
+                 :mlogInfo="mlogInfo"
+                 :albumsNum="albumsNum"
+                 :videosNum="videosNum"
+                 :columnNum="columnNum"
+                 :artistsNum="artistsNum"
+                 :mlogNum="mlogNum"></router-view>
   </div>
 </template>
 

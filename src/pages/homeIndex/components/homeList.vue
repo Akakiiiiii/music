@@ -37,6 +37,7 @@ export default {
       handler (val, oldVal) {
         this.recordNum = val.recordNum
         this.djNum = val.djNum
+        this.collectNum = val.collectNum
         this.setData()
       }
     }
@@ -53,6 +54,7 @@ export default {
        */
       this.$set(item[1], 'num', this.recordNum)
       this.$set(item[3], 'num', this.djNum)
+      this.$set(item[4], 'num', this.collectNum)
       this.homeListContext = item
     },
     handleClick (name) {

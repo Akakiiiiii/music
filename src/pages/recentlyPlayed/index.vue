@@ -1,25 +1,21 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-27 21:51:00
- * @Update: 2019-10-26 08:12:47
- * @Update log: 更新日志
- -->
+
 <template>
   <div class="recentlyPlayed pd23">
-    <general-nav @returnPage="returnPage" class="titleFixed">
+    <general-nav @returnPage="returnPage"
+                 class="titleFixed">
       <span class="text">最近播放</span>
     </general-nav>
-    <audio-all-title @beginAudioAll="beginAudioAll" :trackCount="trackCount" class="titleMt"></audio-all-title>
-    <song-list
-      v-for="(item, index) in recordList"
-      :key="index"
-      :songName="item.name"
-      :artists="item.ar"
-      :albumName="item.al.name"
-      :num="index + 1"
-      @beginSong="setAudioList(item, index)"
-      :nowSong="item.id === audioSong.id"
-    ></song-list>
+    <audio-all-title @beginAudioAll="beginAudioAll"
+                     :trackCount="trackCount"
+                     class="titleMt"></audio-all-title>
+    <song-list v-for="(item, index) in recordList"
+               :key="index"
+               :songName="item.name"
+               :artists="item.ar"
+               :albumName="item.al.name"
+               :num="index + 1"
+               @beginSong="setAudioList(item, index)"
+               :nowSong="item.id === audioSong.id"></song-list>
   </div>
 </template>
 

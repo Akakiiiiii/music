@@ -1,12 +1,7 @@
-/*
- * @Author: 李浩栋
- * @Begin: 2019-08-19 13:47:19
- * @Update: 2019-11-14 13:06:54
- * @Update log: 更新日志
- */
 import axios from 'axios'
 
 import {
+  albumCollec,
   bannerSwiper,
   recSongList,
   highquality,
@@ -973,6 +968,17 @@ export default {
         t,
         type,
         id
+      }
+    })
+  },
+  //   可选参数 :
+  // limit: 取出数量 , 默认为 25
+
+  // offset: 偏移数量 , 用于分页 , 如 :( 页数 -1)*25, 其中 25 为 limit 的值 , 默认 为 0
+  albumCollec (limit = 25) {
+    return axios.get(albumCollec, {
+      params: {
+        limit
       }
     })
   }

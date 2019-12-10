@@ -86,3 +86,4 @@ export const commentDj = api + '/comment/dj' // 获取电台节目评论
 export const commentLike = api + '/comment/like' // 给评论点赞
 export const pushOrDeleteCom = api + '/comment' // 发送删除评论
 export const resourceLike = api + '/resource/like' // 资源点赞
+export const albumCollec = api + '/album/sublist'

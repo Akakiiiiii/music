@@ -33,7 +33,8 @@ export default {
         // 播放记录
         recordNum: 0,
         // 我的电台
-        djNum: 0
+        djNum: 0,
+        collectNum: 0
       },
       songListNum: {
         // 创建的歌单
@@ -95,41 +96,6 @@ export default {
       }
       this.$refs.slider.showSlider()
     },
-    /**
-     * 获取用户播放记录
-     * @param id 用户 uid
-     */
-    getRecord (id) {
-      // 当用户刷新页面时 vuex 状态失效，采用本地存储
-      let uid = localStorage.getItem('accountUid')
-      id = id || uid
-      api
-        .userRecordFn(id)
-        .then(res => {
-          this.homeListNum.recordNum = res.data.weekData.length
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
-    /**
-     * 获取用户信息
-     * 更新我的电台、创建的歌单、收藏的歌单数
-     */
-    _getInfo () {
-      const data = +new Date()
-      api.userInfoFn(data).then(res => {
-        let data = res.data
-        if (data.code === 200) {
-          // 更新我的电台数
-          this.homeListNum.djNum = data.djRadioCount
-          // 更新创建的歌单数
-          this.songListNum.createNum = data.createdPlaylistCount
-          // 更新收藏的歌单数
-          this.songListNum.favoritesNum = data.subPlaylistCount
-        }
-      })
-    },
     ...mapActions(['startPlayAll'])
   },
   computed: {
@@ -145,12 +111,24 @@ export default {
     // 获取用户登录成功后储存的登录标志
     let getFlag = +localStorage.getItem('loginState')
     if (this.loginState || getFlag) {
-      // 用户已经登录
-      // 获取用户信息
-      this._getInfo()
-      // 获取用户播放记录
-      this.getRecord(this.accountUid)
-      // this.$refs.songList.getPlaylist()
+      Promise.all([
+        api.albumCollec(),
+        api.userInfoFn(new Date()),
+        api.userRecordFn(localStorage.getItem('accountUid'))
+      ]).then((res) => {
+        let [collectData, userInfoData, userRecordData] = res
+        collectData = collectData.data.data
+        userInfoData = userInfoData.data
+        userRecordData = userRecordData.data
+        this.homeListNum.collectNum += collectData.length + userInfoData.artistCount + userInfoData.mvCount
+        this.homeListNum.djNum = userInfoData.djRadioCount
+        // 更新创建的歌单数
+        this.songListNum.createNum = userInfoData.createdPlaylistCount
+        // 更新收藏的歌单数
+        this.songListNum.favoritesNum = userInfoData.subPlaylistCount
+
+        this.homeListNum.recordNum = userRecordData.weekData.length
+      })
     }
   }
 }
