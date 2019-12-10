@@ -1,32 +1,34 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-26 13:09:11
- * @Update: 2019-11-03 13:02:37
- * @Update log: 更新日志
- -->
 <template>
   <div class="middle">
-    <div class="mask" v-show="isShow" @click="hide"></div>
-    <div class="addInfo pd23" v-show="isShow">
+    <div class="mask"
+         v-show="isShow"
+         @click="hide"></div>
+    <div class="addInfo pd23"
+         v-show="isShow">
       <h1 class="title">新建歌单</h1>
       <div class="inp">
-        <input
-          class="playlistName"
-          type="text"
-          placeholder="请输入歌单标题"
-          ref="inp"
-          autofocus="autofocus"
-          v-model.trim="playListName"
-        />
-        <i v-show="playListName" @click="clearInp" class="search search-guanbi"></i>
+        <input class="playlistName"
+               type="text"
+               placeholder="请输入歌单标题"
+               ref="inp"
+               autofocus="autofocus"
+               v-model.trim="playListName" />
+        <i v-show="playListName"
+           @click="clearInp"
+           class="search search-guanbi"></i>
       </div>
       <div class="line">
-        <van-checkbox v-model="checked" shape="square" checked-color="#dd001b">设置为隐私歌单</van-checkbox>
+        <van-checkbox v-model="checked"
+                      shape="square"
+                      checked-color="#dd001b">设置为隐私歌单</van-checkbox>
         <span class="length">{{ playListName.length }}/40</span>
       </div>
       <div class="button">
-        <div class="btn" @click="hide">取消</div>
-        <div class="btn" :class="{disable: !playListName}" @click="pushNewPlaylist">提交</div>
+        <div class="btn"
+             @click="hide">取消</div>
+        <div class="btn"
+             :class="{disable: !playListName}"
+             @click="pushNewPlaylist">提交</div>
       </div>
     </div>
   </div>
@@ -34,6 +36,7 @@
 
 <script>
 import api from 'api'
+import { Dialog } from 'vant'
 export default {
   data () {
     return {
@@ -53,9 +56,8 @@ export default {
       this.isShow = false
     },
     open2 () {
-      this.$message({
-        message: '成功添加歌单,请2分钟后刷新查看',
-        type: 'success'
+      Dialog({
+        message: '添加成功'
       })
     },
     /**
@@ -76,6 +78,7 @@ export default {
             this.open2()
             this.clearInp()
             this.hide()
+            this.$emit('succeesAdd')
           }
         }).catch(err => {
           console.log(err)

@@ -4,8 +4,11 @@
   <div class="wrapper"
        @scroll="scrollList">
     <!-- 由于歌单页和今日推荐页面的顶部展示区域高度不同，所以通过动态的 height 进行设置 -->
+
     <div class="container-top"
          :style="{height}">
+      <div class="blur-bg"
+           :style="{backgroundImage:'url('+imgUrl+')'}"></div>
       <!-- 通过传值 isAlbum 的布尔值进行判断，因为在今日推荐页面的页面标题是通过滚动显示隐藏的 -->
       <global-nav class="fixed pd23"
                   v-if="!isAlbum"
@@ -55,7 +58,8 @@
                 <i class="date-song iconfontjiantou5"></i>
               </span>
             </div>
-            <div class="desc-wrapper">
+            <div class="desc-wrapper"
+                 v-if="description">
               <span class="desc">{{description}}</span>
               <i class="date-song iconfontjiantou5"></i>
             </div>
@@ -408,7 +412,7 @@ export default {
   position: fixed;
   width: 100%;
   height: 1rem;
-  background-color: #ee5253;
+  background-color: rgba(0, 0, 0, 0);
   z-index: 9;
 }
 @textColor: #ccc;
@@ -453,7 +457,20 @@ export default {
   .container-top {
     width: 100%;
     color: #fff;
-    background-color: #ee5253;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5);
+    .blur-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      // overflow: hidden;
+      z-index: -1;
+      background-size: 1000px 1000px;
+      filter: blur(20px);
+      background-position: center;
+    }
     .date {
       padding-top: 1.5rem;
       .day {

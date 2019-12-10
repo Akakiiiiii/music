@@ -37,7 +37,7 @@
           :key="index">
         <a class="cover"
            style="width:70%;"
-           @click="goAlbumPage(item.id)"></a>
+           @click="goAlbumPage(item)"></a>
         <div class="list-img">
           <img :src="item.coverImgUrl + '?param=100y100'" />
         </div>
@@ -58,7 +58,7 @@
           v-for="(item, index) in createList"
           :key="index + 1">
         <a class="cover"
-           @click="goAlbumPage(item.id)"></a>
+           @click="goAlbumPage(item)"></a>
         <div class="list-img">
           <img :src="item.coverImgUrl + '?param=100y100'" />
           <i class="home iconsuo"
@@ -109,7 +109,9 @@
         </div>
       </li>
     </ul>
-    <add-new-playlist ref="addNewPlaylist"></add-new-playlist>
+    <add-new-playlist ref="addNewPlaylist"
+                      @succeesAdd="succeesAdd">
+    </add-new-playlist>
   </div>
 </template>
 
@@ -125,7 +127,9 @@ export default {
       // 创建歌单详情
       createList: [],
       // 我的喜欢歌单
-      myLoveList: []
+      myLoveList: [],
+      createIndex: 0,
+      favoritesIndex: 0
     }
   },
   // 使用筛选功能，将列表中的 我喜欢的音乐 标题正确渲染
@@ -157,6 +161,10 @@ export default {
     }
   },
   methods: {
+    succeesAdd () {
+      this.createIndex++
+      this.getPlaylist(this.$store.state.accountUid)
+    },
     showAddNewPlayList () {
       this.$refs.addNewPlaylist.open()
     },
@@ -166,16 +174,18 @@ export default {
     /**
      * 跳转到歌单详情页面
      */
-    goAlbumPage (id) {
-      this.$router.push({
-        name: 'albumPage',
-        params:
-        {
-          albumId: id,
-          imgUrl: this.favoritesList[0].coverImgUrl,
-          name: this.favoritesList[0].name
-        }
-      })
+    goAlbumPage (item) {
+      setTimeout(() => {
+        this.$router.push({
+          name: 'albumPage',
+          params:
+          {
+            albumId: item.id,
+            imgUrl: item.coverImgUrl,
+            name: item.name
+          }
+        })
+      }, 500)
     },
     /**
      * 返回一个随机数
@@ -214,6 +224,7 @@ export default {
       api.playlistFn(id, data).then(res => {
         let data = res.data
         if (data.code === 200) {
+          console.log(data)
           this.sliceInfo(data.playlist)
         }
       })
