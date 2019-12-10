@@ -1,21 +1,13 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-31 19:54:27
- * @Update: 2019-11-12 21:44:53
- * @Update log: 因为存在 url地址自动将中文转换为编码
- *              在第一次加载时，默认组件不能正确添加active样式
- -->
 <template>
-  <div class="wrapper pd23" ref="navs">
+  <div class="wrapper pd23"
+       ref="navs">
     <!-- 使用 replace 它不会向 history 添加新记录 -->
-    <router-link
-      :to="item.text | setPage"
-      class="nav-list"
-      v-for="(item, index) in list"
-      :key="index"
-      exact
-      replace
-    >{{ item.text }}</router-link>
+    <router-link :to="item.text | setPage"
+                 class="nav-list"
+                 v-for="(item, index) in list"
+                 :key="index"
+                 exact
+                 replace>{{ item.text }}</router-link>
     <span class="more">
       <i class="recommend ziyuanxhdpi"></i>
     </span>

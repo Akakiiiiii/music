@@ -1,20 +1,13 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-08 13:17:34
- * @Update: 2019-09-17 10:32:47
- * @Update log: 更新日志
- -->
 <template>
   <div class="wrapper pd23">
-    <div class="img-col" v-show="!load">
-      <img-card
-        v-for="(item, index) in list"
-        :key="index"
-        :playCount="item.playCount"
-        :imgUrl="item.coverImgUrl"
-        :dec="item.name"
-        :albumId="item.id"
-      ></img-card>
+    <div class="img-col"
+         v-show="!load">
+      <img-card v-for="(item, index) in list"
+                :key="index"
+                :playCount="item.playCount"
+                :imgUrl="item.coverImgUrl"
+                :dec="item.name"
+                :albumId="item.id"></img-card>
     </div>
     <page-loading v-show="load"></page-loading>
   </div>
@@ -50,6 +43,7 @@ export default {
     next()
   },
   created () {
+    this.load = true
     this.getCat()
   },
   methods: {

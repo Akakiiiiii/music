@@ -98,7 +98,7 @@ export default {
         audioList.splice(findAudioIndex, 1)
         currentIndex--
       } else {
-        audioList.splice(currentIndex + 1, 1)
+        audioList.splice(findAudioIndex + 1, 1)
       }
     }
 

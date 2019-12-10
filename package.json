@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "cube-ui": "^1.12.34",
     "fastclick": "^1.0.6",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
@@ -69,7 +70,8 @@
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-dev-server": "^2.11.5",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.1.0",
+    "webpack-transform-modules-plugin": "^0.4.4"
   },
   "engines": {
     "node": ">= 6.0.0",

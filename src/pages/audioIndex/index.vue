@@ -138,7 +138,7 @@ export default {
         } else {
           this._checkSong(val.id)
         }
-        this.albumName = val.al.name
+        this.albumName = val.al ? val.al.name : val.album ? val.album.name : ''
         this.allTime = val.duration ? val.duration : val.dt ? val.dt : ''
         this.artist = val.album ? val.album.artists : val.ar ? val.ar : ''
         this.imgUrl = val.album
@@ -550,7 +550,7 @@ export default {
 @import url("//at.alicdn.com/t/font_1410851_orgxdud5s8j.css");
 @import url("~styles/global.less");
 .full {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;

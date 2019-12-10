@@ -1,30 +1,14 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-08 13:17:01
- * @Update: 2019-11-03 14:15:34
- * @Update log: 更新日志
- -->
 <template>
   <div class="pd23">
     <div v-show="!load">
       <!-- 这里缺少歌单页面的轮播图 -->
       <div class="img-col">
-        <img-card
-          v-for="(item, index) in swiper"
-          :key="index"
-          :playCount="item.playCount"
-          :imgUrl="item.coverImgUrl"
-          :dec="item.name"
-          :albumId="item.id"
-        ></img-card>
-        <img-card
-          v-for="(item, index) in list"
-          :key="index"
-          :playCount="item.playCount"
-          :imgUrl="item.coverImgUrl"
-          :dec="item.name"
-          :albumId="item.id"
-        ></img-card>
+        <img-card v-for="(item, index) in list"
+                  :key="index"
+                  :playCount="item.playCount"
+                  :imgUrl="item.coverImgUrl"
+                  :dec="item.name"
+                  :albumId="item.id"></img-card>
       </div>
     </div>
     <page-loading v-show="load"></page-loading>

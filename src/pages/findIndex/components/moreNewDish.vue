@@ -1,9 +1,3 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-10-06 12:57:04
- * @Update: 2019-10-26 08:21:52
- * @Update log: 更新日志
- -->
 <template>
   <div class="wrapper pd23">
     <general-nav @returnPage="returnPage">
@@ -14,52 +8,48 @@
       <div class="nowWeekNewDish">
         <h1 class="title">本周新碟</h1>
         <div class="img-card-wrapper">
-          <img-card
-            v-for="(item, index) in nowWeekNewDish"
-            :key="index"
-            width="2.4rem"
-            :imgUrl="item.picUrl"
-            :dec="item.name"
-            :dishId="item.id"
-            :artists="item.artists"
-            lines="one"
-          ></img-card>
+          <img-card v-for="(item, index) in nowWeekNewDish"
+                    :key="index"
+                    width="2.4rem"
+                    :imgUrl="item.picUrl"
+                    :dec="item.name"
+                    :dishId="item.id"
+                    :artists="item.artists"
+                    lines="one"></img-card>
         </div>
       </div>
-      <div class="nowWeekNewDish" v-show="nowMonth">
+      <div class="nowWeekNewDish"
+           v-show="nowMonth">
         <h1>
           <span class="month">{{month}}月</span>
           <span class="year">/{{year}}</span>
         </h1>
         <div class="img-card-wrapper">
-          <img-card
-            v-for="(item, index) in nowMonth"
-            :key="index"
-            width="2.4rem"
-            :imgUrl="item.picUrl"
-            :dec="item.name"
-            :dishId="item.id"
-            :artists="item.artists"
-            lines="one"
-          ></img-card>
+          <img-card v-for="(item, index) in nowMonth"
+                    :key="index"
+                    width="2.4rem"
+                    :imgUrl="item.picUrl"
+                    :dec="item.name"
+                    :dishId="item.id"
+                    :artists="item.artists"
+                    lines="one"></img-card>
         </div>
       </div>
-      <div class="nowWeekNewDish" v-show="lastMonth.length">
+      <div class="nowWeekNewDish"
+           v-show="lastMonth.length">
         <h1>
           <span class="month">{{prevMonth}}月</span>
           <span class="year">/{{prevYear}}</span>
         </h1>
         <div class="img-card-wrapper">
-          <img-card
-            v-for="(item, index) in lastMonth"
-            :key="index"
-            width="2.4rem"
-            :imgUrl="item.picUrl"
-            :dec="item.name"
-            :dishId="item.id"
-            :artists="item.artists"
-            lines="one"
-          ></img-card>
+          <img-card v-for="(item, index) in lastMonth"
+                    :key="index"
+                    width="2.4rem"
+                    :imgUrl="item.picUrl"
+                    :dec="item.name"
+                    :dishId="item.id"
+                    :artists="item.artists"
+                    lines="one"></img-card>
         </div>
       </div>
     </div>

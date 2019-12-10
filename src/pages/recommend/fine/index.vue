@@ -1,9 +1,3 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-09-08 13:17:12
- * @Update: 2019-09-08 16:10:05
- * @Update log: 更新日志
- -->
 <template>
   <div class="pd23">
     <div v-show="!load">
@@ -14,15 +8,13 @@
         </span>
       </div>
       <div class="img-col">
-        <img-card
-          v-for="(item, index) in list"
-          :key="index"
-          :playCount="item.playCount"
-          :imgUrl="item.coverImgUrl"
-          :albumId="item.id"
-          :dec="item.name"
-          :fine="true"
-        ></img-card>
+        <img-card v-for="(item, index) in list"
+                  :key="index"
+                  :playCount="item.playCount"
+                  :imgUrl="item.coverImgUrl"
+                  :albumId="item.id"
+                  :dec="item.name"
+                  :fine="true"></img-card>
       </div>
     </div>
     <page-loading v-show="load"></page-loading>

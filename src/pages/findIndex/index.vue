@@ -8,9 +8,6 @@
     <icon></icon>
     <song-list ref="songList"></song-list>
     <new-dish></new-dish>
-    <top-tip ref="tip">
-      <span class="tips">{{tips}}</span>
-    </top-tip>
   </van-pull-refresh>
 </template>
 
@@ -23,9 +20,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'findIndex',
-  mounted () {
-    this.$refs.tip.showTip()
-  },
   data () {
     return {
       isLoading: false,
@@ -47,7 +41,6 @@ export default {
       setTimeout(() => {
         this.isLoading = false
         this.tips = '已为你推荐新的个性化内容'
-        this.$refs.tip.showTip()
       }, 500)
     },
     /**

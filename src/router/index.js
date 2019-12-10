@@ -1,9 +1,3 @@
-/*
- * @Author: 李浩栋
- * @Begin: 2019-07-27 17:08:42
- * @Update: 2019-11-26 12:59:53
- * @Update log: 更新日志
- */
 import Vue from 'vue'
 import Router from 'vue-router'
 

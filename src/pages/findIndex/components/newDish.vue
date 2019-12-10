@@ -1,41 +1,38 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-07-27 17:08:42
- * @Update: 2019-10-24 08:52:58
- * @Update log: 更新日志
- -->
 <template>
   <div class="wrapper pd23">
     <div class="title">
       <div class="recommended">
-        <span :class="{active:type==='dish'}" @click="type='dish'">新碟</span>
+        <span :class="{active:type==='dish'}"
+              @click="type='dish'">新碟</span>
         <i style="color:#ddd">|</i>
-        <span :class="{active:type==='newSong'}" @click="type='newSong'">新歌</span>
+        <span :class="{active:type==='newSong'}"
+              @click="type='newSong'">新歌</span>
       </div>
       <div class="square">
-        <span v-show="type==='dish'" @click.stop="moreNewDish">更多新碟</span>
-        <span v-show="type==='newSong'" @click.stop="moreNewSongs">新歌推荐</span>
+        <span v-show="type==='dish'"
+              @click.stop="moreNewDish">更多新碟</span>
+        <span v-show="type==='newSong'"
+              @click.stop="moreNewSongs">新歌推荐</span>
       </div>
     </div>
-    <page-loading style="height:3rem" v-show="load"></page-loading>
+    <page-loading style="height:3rem"
+                  v-show="load"></page-loading>
     <div v-show="!load">
-      <div class="img-col" v-show="type==='dish'">
-        <img-card
-          v-for="(item, index) in dishList"
-          :key="index"
-          :imgUrl="item.picUrl"
-          :dec="item.name"
-          :dishId="item.id"
-        ></img-card>
+      <div class="img-col"
+           v-show="type==='dish'">
+        <img-card v-for="(item, index) in dishList"
+                  :key="index"
+                  :imgUrl="item.picUrl"
+                  :dec="item.name"
+                  :dishId="item.id"></img-card>
       </div>
-      <div class="img-col" v-show="type==='newSong'">
-        <img-card
-          v-for="(item, index) in newSongsList"
-          :key="index"
-          :imgUrl="item.album.blurPicUrl"
-          :dec="item.name"
-          @click.native="beginAudio(item)"
-        ></img-card>
+      <div class="img-col"
+           v-show="type==='newSong'">
+        <img-card v-for="(item, index) in newSongsList"
+                  :key="index"
+                  :imgUrl="item.album.blurPicUrl"
+                  :dec="item.name"
+                  @click.native="beginAudio(item)"></img-card>
       </div>
     </div>
   </div>

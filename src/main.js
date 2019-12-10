@@ -16,9 +16,10 @@ import {
   CheckboxGroup,
   PasswordInput,
   NumberKeyboard,
-  PullRefresh
+  PullRefresh,
+  Tab,
+  Tabs
 } from 'vant'
-
 import 'styles/reset.css'
 import 'styles/border.css'
 
@@ -33,6 +34,7 @@ Vue.use(PullRefresh)
 Vue.use(Swipe).use(SwipeItem)
 Vue.use(Checkbox).use(CheckboxGroup)
 Vue.use(PasswordInput).use(NumberKeyboard)
+Vue.use(Tab).use(Tabs)
 
 Vue.config.productionTip = false
 

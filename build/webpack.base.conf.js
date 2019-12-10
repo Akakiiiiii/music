@@ -1,14 +1,9 @@
-/*
- * @Author: 李浩栋
- * @Begin: 2019-07-30 16:42:30
- * @Update: 2019-11-18 19:13:26
- * @Update log: 更新日志
- */
 'use strict'
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+var TransformModulesPlugin = require('webpack-transform-modules-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -39,6 +34,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
+      'cube-ui': 'cube-ui/lib',
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
       'styles': resolve('src/assets/styles'),
