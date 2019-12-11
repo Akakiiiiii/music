@@ -29,6 +29,7 @@ import pageLoading from 'base/pageLoading'
 import { getRandomArrayElements } from 'utils/getRandomArrayElements'
 
 import { mapGetters } from 'vuex'
+
 export default {
   name: 'songList',
   data () {

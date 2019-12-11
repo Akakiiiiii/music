@@ -92,7 +92,7 @@
           v-for="(item, index) in favoritesList"
           :key="index">
         <a class="cover"
-           @click="goAlbumPage(item.id)"></a>
+           @click="goAlbumPage(item)"></a>
         <div class="list-img">
           <img :src="item.coverImgUrl + '?param=100y100'" />
         </div>

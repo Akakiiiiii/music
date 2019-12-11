@@ -4,15 +4,17 @@
   <div class="wrapper"
        @scroll="scrollList">
     <!-- 由于歌单页和今日推荐页面的顶部展示区域高度不同，所以通过动态的 height 进行设置 -->
-
     <div class="container-top"
          :style="{height}">
       <div class="blur-bg"
-           :style="{backgroundImage:'url('+imgUrl+')'}"></div>
+           :style="{backgroundImage:'url('+imgUrl+')'}">
+      </div>
       <!-- 通过传值 isAlbum 的布尔值进行判断，因为在今日推荐页面的页面标题是通过滚动显示隐藏的 -->
       <global-nav class="fixed pd23"
                   v-if="!isAlbum"
-                  @returnPage="returnPage">
+                  @returnPage="returnPage"
+                  :imgUrl="imgUrl"
+                  :opacity="opacity">
         <!-- 通过改变 listFixed 来控制 title 的显示与否-->
         <span class="text"
               v-show="listFixed">{{iTitle}}</span>
@@ -20,7 +22,9 @@
       <!-- 这里是在歌单页面时，页面标题是一直显示的 -->
       <global-nav class="fixed pd23"
                   v-if="isAlbum"
-                  @returnPage="returnPage">
+                  @returnPage="returnPage"
+                  :imgUrl="imgUrl"
+                  :opacity="opacity">
         <span class="text">{{iTitle}}</span>
       </global-nav>
       <!-- 这里包裹的是每日推荐页面额外显示的日期信息 -->
@@ -136,7 +140,7 @@ import globalNav from 'base/generalNav'
 import pageLoading from 'base/pageLoading'
 import { mapGetters } from 'vuex'
 import api from 'api'
-
+const REM = document.body.clientWidth * 0.14
 const setNum = function (val) {
   if (!val) {
     return ''
@@ -160,6 +164,8 @@ export default {
    */
   data () {
     return {
+      opacity: '0',
+      fixedBg: false,
       iTitle: this.title,
       iAlbumTitle: this.albumTitle,
       listFixed: false,
@@ -365,6 +371,7 @@ export default {
     returnPage () {
       this.listFixed = false
       this.top = '0'
+      this.opacity = '0'
       this.$router.go(-1)
     },
     /**
@@ -376,6 +383,7 @@ export default {
       let top = e.target.scrollTop
       // 当当前组件不是歌单组件时，就是每日推荐页面
       if (!this.isAlbum) {
+        this.opacity = this.opacity <= 1 ? top / (2.6 * REM) + '' : '1'
         if (top >= 136) {
           this.listFixed = true
           this.top = '1rem'
@@ -384,15 +392,16 @@ export default {
           this.top = '0'
         }
       } else {
+        this.opacity = this.opacity <= 1 ? top / (5 * REM) + '' : '1'
         // 当是歌单组件时，当页面滚动到一定位置的时候顶部的标题会变
-        if (top >= 148) {
+        if (top >= 2.6 * REM) {
           // 这里使用data存下了props的值进行修改，子组件不能直接修改props传过来的值
           this.iTitle = this.albumTitle
         } else {
           this.iTitle = this.title
         }
         // 当 top 到了 250 的时候会改变标题行的是否固定样式
-        if (top >= 250) {
+        if (top >= 5 * REM) {
           this.listFixed = true
           this.top = '1rem'
         } else {
@@ -412,7 +421,6 @@ export default {
   position: fixed;
   width: 100%;
   height: 1rem;
-  background-color: rgba(0, 0, 0, 0);
   z-index: 9;
 }
 @textColor: #ccc;
@@ -459,16 +467,23 @@ export default {
     color: #fff;
     position: relative;
     background-color: rgba(0, 0, 0, 0.5);
+    .faker-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1rem;
+      background: #fff;
+    }
     .blur-bg {
       position: absolute;
       top: 0;
       left: 0;
       bottom: 0;
       right: 0;
-      // overflow: hidden;
       z-index: -1;
-      background-size: 1000px 1000px;
-      filter: blur(20px);
+      background-size: cover;
+      filter: blur(50px);
       background-position: center;
     }
     .date {
@@ -579,6 +594,8 @@ export default {
     }
   }
   .list-info {
+    position: relative;
+    z-index: 4;
     width: 100%;
     box-sizing: border-box;
     padding: 0.1rem 0.23rem;

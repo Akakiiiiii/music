@@ -2,6 +2,12 @@
   <nav class="phone-nav"
        ref="nav"
        :class="{height: height === 'all'}">
+    <!-- <div class="fake-bg"
+         v-show="imgUrl"
+         :style="{opacity}"></div> -->
+    <div class="blur-bg"
+         v-show="imgUrl"
+         :style="{backgroundImage:'url('+imgUrl+')',opacity}"></div>
     <i class="phone iconzuojiantou"
        @click="returnPage"></i>
     <slot></slot>
@@ -17,6 +23,14 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'loginNav',
   props: {
+    imgUrl: {
+      type: String,
+      default: ''
+    },
+    opacity: {
+      type: String,
+      default: '0'
+    },
     nav: {
       type: String,
       default: ''
@@ -46,10 +60,32 @@ export default {
 <style lang="less" scoped>
 @import url("//at.alicdn.com/t/font_1550123_8ybvu6bwh0w.css");
 @import url("//at.alicdn.com/t/font_1351323_oxqdjg3rufq.css");
-
+.fake-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -2;
+  background-color: rgb(0, 0, 0);
+  overflow: hidden;
+}
+.blur-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center bottom;
+  filter: blur(50px);
+  margin: -100px;
+}
 .phone-nav {
   display: flex;
   align-items: center;
+  overflow: hidden;
   &.height {
     height: 1rem;
     line-height: 1rem;

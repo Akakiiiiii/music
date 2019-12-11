@@ -552,7 +552,6 @@ export default {
 
 <style lang='less' scoped>
 @import url("//at.alicdn.com/t/font_1410851_orgxdud5s8j.css");
-@import url("~styles/global.less");
 .full {
   position: fixed;
   top: 0;

@@ -3,7 +3,8 @@
                   :load="load"
                   :isAlbum="false"
                   height="3.6rem"
-                  @startPlayAll="startPlay">
+                  @startPlayAll="startPlay"
+                  :imgUrl="imgUrl">
     <song-list v-for="(item, index) in songLists"
                :key="index"
                :songName="item.name"
@@ -28,7 +29,8 @@ export default {
   data () {
     return {
       songLists: [],
-      load: ''
+      load: '',
+      imgUrl: ''
     }
   },
   created () {
@@ -46,6 +48,7 @@ export default {
             const data = res.data
             if (data.code === 200) {
               this.songLists = data.recommend
+              this.imgUrl = data.recommend[0].album.picUrl
               this.load = false
             }
           })

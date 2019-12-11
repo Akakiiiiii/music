@@ -114,8 +114,6 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@import url("~styles/global.less");
-
 .list-show-enter,
 .list-show-leave-to {
   transform: translateY(7rem);
