@@ -134,7 +134,6 @@ export default {
 
     if (currentIndex > pIndex || currentIndex === audioList.length) {
       currentIndex--
-      console.log(currentIndex)
     }
 
     commit(SET_AUDIO_LIST, audioList)

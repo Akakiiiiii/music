@@ -16,6 +16,7 @@
     "fastclick": "^1.0.6",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
+    "node-waves": "^0.7.6",
     "qs": "^6.8.0",
     "smoothscroll-polyfill": "^0.4.4",
     "vant": "^2.2.10",

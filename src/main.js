@@ -6,6 +6,7 @@ import fastclick from 'fastclick'
 import VueLazyload from 'vue-lazyload'
 import topTip from '@/components/top-tip'
 import smoothscroll from 'smoothscroll-polyfill'
+import 'styles/waves.min.css'
 import {
   Search,
   ActionSheet,
@@ -47,7 +48,8 @@ Vue.use(VueLazyload, {
 })
 
 Vue.component('top-tip', topTip)
-
+// eslint-disable-next-line
+Vue.prototype.$wave = (Waves)
 /* eslint-disable no-new */
 // eslint-disable-next-line no-unused-vars
 var vm = new Vue({

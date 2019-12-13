@@ -3,7 +3,8 @@
     <ul>
       <li v-for="(item, index) in homeListContext"
           :key="index"
-          class="list-item">
+          class="list-item"
+          ref="waveItem">
         <i class="home"
            :class="item.icon"></i>
         <div class="border-bottom wrapper"
@@ -56,12 +57,18 @@ export default {
       this.$set(item[3], 'num', this.djNum)
       this.$set(item[4], 'num', this.collectNum)
       this.homeListContext = item
+      setTimeout(() => {
+        this.$wave.init({
+          duration: 1000
+        })
+        this.$wave.attach(this.$refs.waveItem)
+      }, 100)
     },
     handleClick (name) {
       console.log(name)
       setTimeout(() => {
         this.goPage(name)
-      }, 500)
+      }, 150)
     },
     goPage (name) {
       switch (name) {
@@ -88,7 +95,7 @@ export default {
   .flex-between();
   margin: 0.1rem 0;
   line-height: 0.76rem;
-  .ripple();
+  // .ripple();
   &:last-child .wrapper::before {
     border: none;
   }
