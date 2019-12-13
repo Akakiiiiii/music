@@ -65,18 +65,11 @@ export default {
     this.getParams()
     this.load = true
     this.albumInfo = []
-    let idxId = this.$route.params.idxId
     let dishId = this.$route.params.dishId
     if (this.albumId) {
       this.title = '歌单'
       this._getInfo(this.albumId)
       this.setAlbumId(this.albumId)
-      return
-    }
-    if (idxId || idxId === 0) {
-      this.title = ''
-      this.idxId = +idxId
-      this._getIdxInfo(idxId)
       return
     }
     if (dishId) {
@@ -162,7 +155,7 @@ export default {
       })
     },
     getParams () {
-      this.albumId = +this.$route.params.albumId
+      this.albumId = +this.$route.params.albumId || 0
       this.name = this.$route.params.name
       this.imgUrl = this.$route.params.imgUrl
     },

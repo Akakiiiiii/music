@@ -1,48 +1,48 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-27 12:42:24
- * @Update: 2019-11-14 13:38:05
- * @Update log: 搜索框
- -->
 <template>
   <div class="wrapper pd23">
     <!-- 左边的返回箭头 -->
-    <i class="iconfont zuojiantou" @click="returnPage"></i>
+    <i class="iconfont zuojiantou"
+       @click="returnPage"></i>
     <!-- input 框，设置使得 input 页面加载input自动聚焦 -->
     <!-- 聚焦后显示搜索建议 -->
-    <input
-      class="search"
-      type="text"
-      :placeholder="placeholder"
-      ref="inp"
-      autofocus="autofocus"
-      v-model.trim="keywords"
-      @focus="displayList"
-    />
+    <input class="search"
+           type="text"
+           :placeholder="placeholder"
+           ref="inp"
+           autofocus="autofocus"
+           v-model.trim="keywords"
+           @focus="displayList" />
     <!-- 通过观测输入框中是否有内容用来控制右侧的叉按钮是否显示 -->
     <!-- 为叉按钮定义点击事件，点击清空输入框 -->
-    <i v-show="keywords" @click="clearInp" class="iconfont guanbi" :style="{right: Right}"></i>
-    <i class="iconfont geshou" v-if="page" @click="goSingerPage"></i>
+    <i v-show="keywords"
+       @click="clearInp"
+       class="iconfont guanbi"
+       :style="{right: Right}"></i>
+    <i class="iconfont geshou"
+       v-if="page"
+       @click="goSingerPage"></i>
     <!-- 搜索建议列表信息 -->
-    <div class="floatInfo" v-show="showList">
+    <div class="floatInfo"
+         v-show="showList">
       <ul>
-        <li @click="searchKey(keywords)" class="blue border-bottom">
+        <li @click="searchKey(keywords)"
+            class="blue border-bottom">
           搜索
           <span class="text">"{{ keywords }}"</span>
         </li>
-        <li
-          @click="searchKey(item.keyword)"
-          class="border-bottom"
-          v-for="(item, index) in searchList"
-          :key="index"
-        >
+        <li @click="searchKey(item.keyword)"
+            class="border-bottom"
+            v-for="(item, index) in searchList"
+            :key="index">
           <i class="iconfont sousuo"></i>
           {{ item.keyword }}
         </li>
       </ul>
     </div>
     <!-- 蒙层，当搜索建议显示，蒙层显示，控制列表不能滚动 -->
-    <div class="mask" v-show="showList" @click="hideList"></div>
+    <div class="mask"
+         v-show="showList"
+         @click="hideList"></div>
   </div>
 </template>
 
@@ -68,14 +68,13 @@ export default {
       searchList: [],
       keywords: '',
       showList: false,
-      // 将 history 存入 vuex
-      history: [],
       // 防抖定时器
       time: null,
       placeholder: ''
     }
   },
   created () {
+    console.log('我是input的create')
     // 获取焦点
     this.changFocus()
     // 先将默认搜索建议显示
@@ -83,11 +82,10 @@ export default {
     // 历史记录项点击搜索
     this.historySearch()
     // 页面首次加载，由于 keyword 没有被watch监听，所以使用函数方法进行赋值
-    this.setKeyword()
+    // this.setKeyword()
   },
   mounted () {
-    // 获取历史搜索记录
-    this.getHistory()
+    this.setHistory()
   },
   watch: {
     /**
@@ -110,9 +108,12 @@ export default {
       }
     },
     // 对于prop传过来的值，在第一次使用方法进行修改，随后监听keyword变化，对搜索内容进行修改
-    keyword: function (val, oldVal) {
-      if (val) {
-        this.keywords = val
+    keyword: {
+      immediate: true,
+      handler (nVal, oVal) {
+        if (nVal) {
+          this.keywords = nVal
+        }
       }
     }
   },
@@ -220,7 +221,7 @@ export default {
     /**
      * 获取历史搜索记录
      */
-    getHistory (key) {
+    setHistory (key) {
       let keys = localStorage.getItem('keys') ? localStorage.getItem('keys').split(',') : []
       if (key) {
         // 将关键字插入到数组最前面
@@ -230,10 +231,9 @@ export default {
         // 存入本地
         localStorage.setItem('keys', keys)
       }
-      this.history = keys
       // 通过Bus 进行兄弟组件之间传值
       // 通过 Bus.$emit('方法名',要传的值)
-      Bus.$emit('history', this.history)
+      Bus.$emit('history', keys)
     },
     /**
      * 向导航标签传递key值
@@ -249,7 +249,7 @@ export default {
      * 搜索功能跳转到搜索展示页面
      */
     searchKey (key) {
-      this.getHistory(key)
+      this.setHistory(key)
       this.hideList()
       this.clearInp()
       // 这里解决了Bus传值第一次无法获取到的问题
@@ -269,7 +269,7 @@ export default {
         console.log('type error!')
         return
       }
-      return Array.prototype.filter.call(arr, function (item, index) {
+      return arr.filter((item, index) => {
         return arr.indexOf(item) === index
       })
     },

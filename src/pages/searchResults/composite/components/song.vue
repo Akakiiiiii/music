@@ -1,32 +1,22 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-31 10:56:42
- * @Update: 2019-11-01 13:25:31
- * @Update log: 更新日志
- -->
 <template>
-  <list-global
-    title="单曲"
-    :songList="true"
-    :more="songList.more"
-    :moreText="songList.moreText"
-    linkPage="song"
-    :keyW="keyword"
-  >
+  <list-global title="单曲"
+               :songList="true"
+               :more="songList.more"
+               :moreText="songList.moreText"
+               linkPage="song"
+               :keyW="keyword">
     <ul class="song-group">
-      <song-list
-        v-for="(item, index) in songList"
-        :key="index"
-        tag="li"
-        class="list-item"
-        :songName="item.name"
-        :alia="item.alia.length > 0 ? item.alia[0] : ''"
-        :artists="item.ar"
-        :albumName="item.al.name"
-        :keyword="keyword"
-        @beginSong="setAudioList(item)"
-        :nowSong="item.id === audioSong.id"
-      ></song-list>
+      <song-list v-for="(item, index) in songList"
+                 :key="index"
+                 tag="li"
+                 class="list-item"
+                 :songName="item.name"
+                 :alia="item.alia.length > 0 ? item.alia[0] : ''"
+                 :artists="item.ar"
+                 :albumName="item.al.name"
+                 :keyword="keyword"
+                 @beginSong="setAudioList(item)"
+                 :nowSong="item.id === audioSong.id"></song-list>
     </ul>
   </list-global>
 </template>

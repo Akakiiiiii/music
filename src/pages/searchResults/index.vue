@@ -1,15 +1,9 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-30 12:05:38
- * @Update: 2019-11-15 13:48:06
- * @Update log: 更新日志
- * 建立各个组件，将对象传给对应的组件进行渲染
- -->
 <template>
   <div>
     <search-input :keyword="key"></search-input>
     <nav-list></nav-list>
-    <router-view :keywords="key" style="height: 87vh; overflow-y: scroll;"></router-view>
+    <router-view :keywords="key"
+                 style="height: 87vh; overflow-y: scroll;"></router-view>
   </div>
 </template>
 
@@ -51,8 +45,6 @@ export default {
 
 <style lang='less' scoped>
 @import url("//at.alicdn.com/t/font_1380711_5p2kgyidw5.css");
-
-@import url("~styles/global.less");
 .el-button--info {
   background: #fff;
   color: #000;

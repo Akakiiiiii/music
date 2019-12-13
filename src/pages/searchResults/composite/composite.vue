@@ -1,31 +1,34 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-31 11:17:07
- * @Update: 2019-11-26 12:50:39
- * @Update log: 综合页面展示
- -->
 <template>
   <div class="wrapper pd23">
     <div v-show="!load">
       <div v-if="!info">
-        <song-list :songList="songList" :keyword="keywords" v-if="orderList.includes('song')"></song-list>
-        <play-list
-          :playList="playListList"
-          :keyword="keywords"
-          v-if="orderList.includes('playList')"
-        ></play-list>
-        <video-list :videoList="videoList" :keyword="keywords" v-if="orderList.includes('video')"></video-list>
-        <sim-query
-          :simQuery="sim_queryList"
-          :keyword="keywords"
-          v-if="orderList.includes('sim_query')"
-        ></sim-query>
-        <artist :artist="artistList" :keyword="keywords" v-if="orderList.includes('artist')"></artist>
-        <album :album="albumList" :keyword="keywords" v-if="orderList.includes('album')"></album>
-        <dj-radio :djRadio="djRadioList" :keyword="keywords" v-if="orderList.includes('djRadio')"></dj-radio>
-        <user :user="userList" :keyword="keywords" v-if="orderList.includes('user')"></user>
+        <song-list :songList="songList"
+                   :keyword="keywords"
+                   v-if="orderList.includes('song')"></song-list>
+        <play-list :playList="playListList"
+                   :keyword="keywords"
+                   v-if="orderList.includes('playList')"></play-list>
+        <video-list :videoList="videoList"
+                    :keyword="keywords"
+                    v-if="orderList.includes('video')"></video-list>
+        <sim-query :simQuery="sim_queryList"
+                   :keyword="keywords"
+                   v-if="orderList.includes('sim_query')"></sim-query>
+        <artist :artist="artistList"
+                :keyword="keywords"
+                v-if="orderList.includes('artist')"></artist>
+        <album :album="albumList"
+               :keyword="keywords"
+               v-if="orderList.includes('album')"></album>
+        <dj-radio :djRadio="djRadioList"
+                  :keyword="keywords"
+                  v-if="orderList.includes('djRadio')"></dj-radio>
+        <user :user="userList"
+              :keyword="keywords"
+              v-if="orderList.includes('user')"></user>
       </div>
-      <info :info="info" :keywords="keywords"></info>
+      <info :info="info"
+            :keywords="keywords"></info>
     </div>
     <page-loading v-show="load"></page-loading>
   </div>

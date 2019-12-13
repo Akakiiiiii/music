@@ -1,100 +1,94 @@
-<!--
- * @Author: Lambda
- * @Begin: 2019-10-13 12:03:28
- * @Update: 2019-11-14 14:03:58
- * @Update log: 更新日志
- -->
 <template>
-  <div class="wrapper" @scroll="scrollList">
-    <dj-detail-nav @returnPage="returnPage" class="fixed pd23" style="color:#fff;">
+  <div class="wrapper"
+       @scroll="scrollList">
+    <dj-detail-nav @returnPage="returnPage"
+                   class="fixed pd23"
+                   style="color:#fff;">
       <span class="text">{{iTitle}}</span>
     </dj-detail-nav>
-    <div
-      class="container-top"
-      :class="{coverFixed, position}"
-      :style="{backgroundImage: 'url(' + coverImgUrl + ')'}"
-    >
-      <div class="cover" :style="{backgroundColor: `rgba(0, 0, 0, ${cover})`}"></div>
-      <div class="data" v-show="!listFixed" :style="{opacity}">
+    <div class="container-top"
+         :class="{coverFixed, position}"
+         :style="{backgroundImage: 'url(' + coverImgUrl + ')'}">
+      <div class="cover"
+           :style="{backgroundColor: `rgba(0, 0, 0, ${cover})`}"></div>
+      <div class="data"
+           v-show="!listFixed"
+           :style="{opacity}">
         <div>
           <div class="name">{{name}}</div>
           <div class="num">{{subscription}}人已订阅</div>
         </div>
-        <div class="subscription" v-show="!subed" @click.prevent="addDj">
-          <svg
-            t="1571198266501"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="1753"
-            width="14"
-            height="14"
-          >
-            <path
-              d="M737.792 910.6944a57.2416 57.2416 0 0 1-26.7264-6.656l-197.5296-103.8336-197.5296 103.8336a57.2416 57.2416 0 0 1-83.0464-60.3648l37.6832-220.16L110.848 467.968a57.2928 57.2928 0 0 1 31.744-97.6896L363.52 338.2272 462.1824 138.24a56.832 56.832 0 0 1 51.2-31.8976 56.9344 56.9344 0 0 1 51.2 31.8976l98.7648 200.1408 220.8256 32.0512A57.2928 57.2928 0 0 1 916.48 467.968l-159.7952 155.7504 37.7344 220.16a57.3952 57.3952 0 0 1-56.32 67.0208zM159.8464 430.08l155.2896 151.3984a57.2416 57.2416 0 0 1 16.4352 50.688l-36.6592 213.5552 192-100.9152a57.088 57.088 0 0 1 53.2992 0L732.16 845.7216l-36.6592-213.76a57.344 57.344 0 0 1 16.4352-50.688L867.2768 430.08l-214.6304-31.1808a57.2928 57.2928 0 0 1-43.1104-31.3344l-96-194.56-96 194.56a57.2416 57.2416 0 0 1-43.1104 31.3344z m715.6736 1.024zM509.7984 165.2736z"
-              fill="#ffffff"
-              p-id="1754"
-            />
+        <div class="subscription"
+             v-show="!subed"
+             @click.prevent="addDj">
+          <svg t="1571198266501"
+               class="icon"
+               viewBox="0 0 1024 1024"
+               version="1.1"
+               xmlns="http://www.w3.org/2000/svg"
+               p-id="1753"
+               width="14"
+               height="14">
+            <path d="M737.792 910.6944a57.2416 57.2416 0 0 1-26.7264-6.656l-197.5296-103.8336-197.5296 103.8336a57.2416 57.2416 0 0 1-83.0464-60.3648l37.6832-220.16L110.848 467.968a57.2928 57.2928 0 0 1 31.744-97.6896L363.52 338.2272 462.1824 138.24a56.832 56.832 0 0 1 51.2-31.8976 56.9344 56.9344 0 0 1 51.2 31.8976l98.7648 200.1408 220.8256 32.0512A57.2928 57.2928 0 0 1 916.48 467.968l-159.7952 155.7504 37.7344 220.16a57.3952 57.3952 0 0 1-56.32 67.0208zM159.8464 430.08l155.2896 151.3984a57.2416 57.2416 0 0 1 16.4352 50.688l-36.6592 213.5552 192-100.9152a57.088 57.088 0 0 1 53.2992 0L732.16 845.7216l-36.6592-213.76a57.344 57.344 0 0 1 16.4352-50.688L867.2768 430.08l-214.6304-31.1808a57.2928 57.2928 0 0 1-43.1104-31.3344l-96-194.56-96 194.56a57.2416 57.2416 0 0 1-43.1104 31.3344z m715.6736 1.024zM509.7984 165.2736z"
+                  fill="#ffffff"
+                  p-id="1754" />
           </svg>订阅
         </div>
-        <div class="subscription1" v-show="subed" @click.prevent="deleteDj">
-          <svg
-            t="1571203188806"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="2523"
-            width="14"
-            height="14"
-          >
-            <path
-              d="M926.037333 224.256c-22.016-22.016-57.685333-22.016-79.701333 0L384.853333 685.738667 179.370667 480.256c-22.016-22.016-57.685333-22.016-79.701334 0-22.016 22.016-22.016 57.685333 0 79.701333l239.786667 239.786667c12.458667 12.458667 29.184 17.749333 45.397333 16.213333 16.213333 1.536 32.938667-3.754667 45.397334-16.213333l495.786666-495.786667c22.016-22.016 22.016-57.685333 0-79.701333z"
-              fill="#ffffff"
-              p-id="2524"
-            />
+        <div class="subscription1"
+             v-show="subed"
+             @click.prevent="deleteDj">
+          <svg t="1571203188806"
+               class="icon"
+               viewBox="0 0 1024 1024"
+               version="1.1"
+               xmlns="http://www.w3.org/2000/svg"
+               p-id="2523"
+               width="14"
+               height="14">
+            <path d="M926.037333 224.256c-22.016-22.016-57.685333-22.016-79.701333 0L384.853333 685.738667 179.370667 480.256c-22.016-22.016-57.685333-22.016-79.701334 0-22.016 22.016-22.016 57.685333 0 79.701333l239.786667 239.786667c12.458667 12.458667 29.184 17.749333 45.397333 16.213333 16.213333 1.536 32.938667-3.754667 45.397334-16.213333l495.786666-495.786667c22.016-22.016 22.016-57.685333 0-79.701333z"
+                  fill="#ffffff"
+                  p-id="2524" />
           </svg>已订阅
         </div>
       </div>
     </div>
-    <change-nav
-      :class="{listFixed}"
-      :active="active"
-      :count="count"
-      firstNav="详情"
-      secondNav="节目"
-      @changeToSecond="changeToSecond"
-      @changeToFirst="changeToFirst"
-    ></change-nav>
-    <div class="container-bottom" :style="{ marginTop: top}">
-      <div class="song-list" v-show="active==='second'">
+    <change-nav :class="{listFixed}"
+                :active="active"
+                :count="count"
+                firstNav="详情"
+                secondNav="节目"
+                @changeToSecond="changeToSecond"
+                @changeToFirst="changeToFirst"></change-nav>
+    <div class="container-bottom"
+         :style="{ marginTop: top}">
+      <div class="song-list"
+           v-show="active==='second'">
         <page-loading v-show="loading"></page-loading>
         <div v-show="!loading">
           <h1 class="sum-num pd23">共{{count}}期</h1>
-          <song-list
-            class="pd23"
-            v-for="(item, index) in djProgramData"
-            :key="index"
-            :songName="item.name"
-            :num="djProgramData.length - index"
-            :createTime="item.createTime"
-            :listenerCount="item.listenerCount"
-            :duration="item.duration"
-            :twoLine="true"
-            :itemId="item.id"
-            @showSlider="showSlider"
-            type="djList"
-            @beginSong="setAudioList(item, index)"
-            :nowSong="item.id === audioSong.id"
-          ></song-list>
+          <song-list class="pd23"
+                     v-for="(item, index) in djProgramData"
+                     :key="index"
+                     :songName="item.name"
+                     :num="djProgramData.length - index"
+                     :createTime="item.createTime"
+                     :listenerCount="item.listenerCount"
+                     :duration="item.duration"
+                     :twoLine="true"
+                     :itemId="item.id"
+                     @showSlider="showSlider"
+                     type="djList"
+                     @beginSong="setAudioList(item, index)"
+                     :nowSong="item.id === audioSong.id"></song-list>
         </div>
       </div>
-      <div class="detail pd23" v-show="active==='first'">
+      <div class="detail pd23"
+           v-show="active==='first'">
         <h1 class="anchor">主播</h1>
         <div class="content">
           <div class="img-info">
-            <img :src="avatarUrl" alt />
+            <img :src="avatarUrl"
+                 alt />
           </div>
           <div class="artist">
             <p class="name">{{detailName}}</p>
@@ -109,14 +103,12 @@
         <p class="text">{{desc}}</p>
       </div>
     </div>
-    <slider
-      ref="slider"
-      :title="title"
-      :author="name"
-      :imgUrl="coverImgUrl"
-      :id="itemId"
-      :djDetailList="djDetail"
-    ></slider>
+    <slider ref="slider"
+            :title="title"
+            :author="name"
+            :imgUrl="coverImgUrl"
+            :id="itemId"
+            :djDetailList="djDetail"></slider>
   </div>
 </template>
 

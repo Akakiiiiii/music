@@ -127,6 +127,10 @@ export default {
      */
     audioSong: function (val, oldVal) {
       // 查看当前播放歌曲是否已喜欢
+      if (!Object.keys(val).length) {
+        console.log('已经return')
+        return
+      }
       this._getLikeMusicList(val.id)
       if (val.id === oldVal.id) {
         return
@@ -139,7 +143,7 @@ export default {
           this._checkSong(val.id)
         }
         this.albumName = val.al ? val.al.name : val.album ? val.album.name : ''
-        this.allTime = val.duration ? val.duration : val.dt ? val.dt : ''
+        this.allTime = val.duration ? val.duration : val.dt ? val.dt : 0
         this.artist = val.album ? val.album.artists : val.ar ? val.ar : ''
         this.imgUrl = val.album
           ? val.album.picUrl

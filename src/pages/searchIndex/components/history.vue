@@ -1,27 +1,23 @@
-<!--
- * @Author: 李浩栋
- * @Begin: 2019-08-27 13:29:51
- * @Update: 2019-08-31 10:06:52
- * @Update log: 更新日志
- -->
 <template>
- <div class="history pd23" v-if="history.length">
-   <div class="history-title">
-     <span>历史记录</span>
-     <i class="search iconlajitong" @click="clearHistory"></i>
-   </div>
-   <div class="wrapper">
-    <div class="container ">
-      <ul class="icons-group">
-        <li class="icon-list"
-            @click="toSearch(item)"
-            v-for="(item, index) in history"
-            :key="index">{{item}}
-        </li>
-      </ul>
+  <div class="history pd23"
+       v-if="history.length">
+    <div class="history-title">
+      <span>历史记录</span>
+      <i class="search iconlajitong"
+         @click="clearHistory"></i>
+    </div>
+    <div class="wrapper">
+      <div class="container ">
+        <ul class="icons-group">
+          <li class="icon-list"
+              @click="toSearch(item)"
+              v-for="(item, index) in history"
+              :key="index">{{item}}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
- </div>
 </template>
 
 <script>
@@ -45,6 +41,7 @@ export default {
       // Bus.$on('方法名(与兄弟组件方法名一致), 回调函数 参数为传过来的值')
       Bus.$on('history', (history) => {
         this.history = history
+        console.log(history)
       })
     },
     /**
@@ -62,18 +59,18 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@import url('~styles/global.less');
-.history{
+@import url("~styles/global.less");
+.history {
   margin-top: 0.5rem;
-  .history-title{
+  .history-title {
     .flex-between();
     height: 0.8rem;
     line-height: 0.8rem;
-    .iconlajitong{
+    .iconlajitong {
       width: 0.8rem;
       height: 0.8rem;
       text-align: center;
-      font-size: 0.4rem
+      font-size: 0.4rem;
     }
   }
   .wrapper {
