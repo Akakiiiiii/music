@@ -1,5 +1,7 @@
 <!--index.wxml-->
 <navigation></navigation>
-<search>
-</search>
+<view class="search-wrap">
+  <search class="search"></search>
+  <image src="{{gifUrl}}" class="gif"></image>
+</view>
 

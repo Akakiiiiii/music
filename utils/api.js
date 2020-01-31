@@ -1,4 +1,4 @@
-module.export = {
+module.exports = {
   fetch:function(obj){
     return new Promise((res,rej)=>{
       let {url,method,data} = obj

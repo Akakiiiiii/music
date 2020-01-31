@@ -1,7 +1,6 @@
 {
   "component":true,
   "usingComponents":{
-    "wux-icon":"/demo/icon/index",
-    "wux-input":"/demo/input/index"
+    "wux-icon":"/demo/icon/index"
   }
 }
