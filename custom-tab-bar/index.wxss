@@ -1,0 +1,21 @@
+.wrap {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+}
+.tab-item{
+  flex:1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img {
+  display: block;
+  margin: 0 auto;
+  width: 35rpx;
+  height: 35rpx;
+}
+.text{
+  font-size: 25rpx;
+}

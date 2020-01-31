@@ -1,0 +1,9 @@
+<view class="wrap">
+    <view bindtap="switchTab" class="tab-item" data-index="{{index}}" data-path="{{item.pagePath}}" wx:for="{{list}}" wx:key="index">
+        <view class="item-wrap">
+            <image class="img" src="{{selected==index?item.selectedIconPath:item.iconPath}}"></image>
+            <view class="tabWord {{selected==index?'selected':''}}" class="text">{{item.text}}</view>
+        </view>
+    </view>
+    <view class="ipx-bottom" wx:if="{{iPxBar}}"></view>
+</view>

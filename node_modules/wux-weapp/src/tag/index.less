@@ -1,0 +1,66 @@
+@import "../styles/mixins/index.less";
+@import "../styles/themes/index.less";
+
+@preset-colors: #eb2f96, #eb2f96, #f5222d, #fa541c, #fa8c16, #fadb14, #faad14, #13c2c2, #a0d911, #52c41a, #1890ff, #2f54eb, #722ed1;
+@preset-classnames: pink, magenta, red, volcano, orange, yellow, gold, cyan, lime, green, blue, geekblue, purple;
+
+// mixin to iterate over colors and create CSS class for each one
+.make-color-classes(@i: length(@preset-classnames)) when (@i > 0) {
+    .make-color-classes(@i - 1);
+    @classname: extract(@preset-classnames, @i);
+    @darkColor: extract(@preset-colors, @i);
+    @lightColor: fade(@darkColor, 6);
+    @lightBorderColor: fade(@darkColor, 30);
+
+    &--@{classname} {
+        color: @darkColor;
+        background: @lightColor;
+        border-color: @lightBorderColor;
+    }
+
+    &--@{classname}-inverse {
+        color: @text-color-inverse;
+        background: @darkColor;
+        border-color: @darkColor;
+    }
+}
+
+.@{wux-prefix}-tag {
+    color: @tag-default-color;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    line-height: 20px;
+    height: 22px;
+    padding: 0 7px;
+    border-radius: @border-radius-base;
+    border: @border-width-base @border-style-base @border-color-base;
+    background: @tag-default-bg;
+    font-size: @tag-font-size;
+    transition: all .3s cubic-bezier(.215, .61, .355, 1);
+    opacity: 1;
+    margin-right: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &--hover {
+        opacity: .85;
+    }
+
+    &__icon {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-left: @margin-component-base;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: contain;
+
+        .encoded-svg-background(delete);
+    }
+
+    .make-color-classes();
+}

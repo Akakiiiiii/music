@@ -1,0 +1,4 @@
+var a = getApp()
+Component({
+  
+})

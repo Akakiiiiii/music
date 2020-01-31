@@ -5,10 +5,25 @@
     "pages/user/user"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "哔哩哔哩",
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 20,
+    "navigationStyle": "custom"
+  },"tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/index/index"
+      },
+      {
+        "pagePath": "pages/zone/zone"
+      },
+      {
+        "pagePath": "pages/user/user"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

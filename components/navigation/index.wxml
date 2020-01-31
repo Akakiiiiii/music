@@ -1,0 +1,8 @@
+<view style="height:{{capsule.bottom}}px;padding-top:{{capsule.top}}px" class="nav">
+  <view class="title" 
+        style="height:{{capsule.height}}px;font-size:{{capsule.height-11}}px"
+        wx:if="{{type=='normal'}}"
+  >
+  哔哩哔哩
+  </view>
+</view>
