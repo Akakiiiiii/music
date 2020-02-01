@@ -4,6 +4,10 @@ Component({
     palceHolder:{
       type:String,
       value:''
+    },
+    isDisabled:{
+      type:Boolean,
+      value:false
     }
   }
 })

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "navigation": "/components/navigation/index",
+    "search": "/components/search/index"
+  }
+}

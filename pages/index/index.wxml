@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <navigation></navigation>
 <view class="search-wrap">
-  <search class="search"></search>
+  <search class="search" bindtap="skipFind" isDisabled="true"></search>
   <image src="{{gifUrl}}" class="gif"></image>
 </view>
 

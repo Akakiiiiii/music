@@ -1,5 +1,10 @@
 <view class="input">
-<wux-icon type="ios-search" size="17" color="rgb(116,116,116)">
+<wux-icon type="ios-search" size="17" color="rgb(116,116,116)" class="icon">
 </wux-icon>
-<input value=""  placeholder="{{palceHolder}}" focus="{{isFocus}}" confirmType="search"></input>
+<input 
+  value="" 
+  placeholder="{{palceHolder}}"
+  focus="{{isFocus}}" 
+  confirmType="search"
+  disabled="{{isDisabled}}"></input>
 </view>

@@ -14,6 +14,9 @@ Page({
       selected:0
     })
   },
+  skipFind(){
+    wx.navigateTo({ url: '../find/find' })
+  },
   getGifLink(){
     fetch({
       url: 'http://192.168.1.5:3001/getGif'

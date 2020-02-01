@@ -5,3 +5,6 @@
   border-radius: 12px;
   padding-left: 8px;
 }
+.icon{
+  padding-right: 8px;
+}

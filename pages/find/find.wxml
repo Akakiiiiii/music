@@ -1,0 +1,6 @@
+<!--pages/find/find.wxml-->
+<navigation></navigation>
+<view class="search-wrap">
+  <search class="search"></search>
+  <text bindtap="back" class="back">取消</text>
+</view>

@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/zone/zone",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/find/find"
   ],
   "window": {
     "backgroundTextStyle": "dark",
