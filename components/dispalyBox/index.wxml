@@ -1,0 +1,15 @@
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+
+<view class="box-wrap">
+  <image src="{{imgUrl}}" class="img" mode="widthFix">
+  <van-tag round type="primary" class="duration" color="rgba(0,0,0,0.5)">{{filters.formatDuration(duration)}}</van-tag>
+  </image>
+  <view class="desc">
+    <text class="title">{{title}}</text>
+    <van-tag type="warning">{{hotDesc}}</van-tag>
+    <text class="name">{{authorName}}</text>
+    <text class="num">{{filters.formatPlayNum(viewNb)}}万次观看   {{filters.formatDate(pubdate)}}</text>
+  </view>
+  <van-icon name="share" class="icon" />
+</view>
+

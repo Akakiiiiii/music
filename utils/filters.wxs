@@ -1,0 +1,22 @@
+module.exports = {
+  formatPlayNum: function(num) {
+    return (num / 10000).toFixed(1)
+  },
+  formatDuration: function(num) {
+    var min = Math.floor(num / 60)
+    var sec = num - min * 60
+    if (min < 10) {
+      min = '0' + min
+    }
+    if (sec < 10) {
+      sec = '0' + sec
+    }
+    return min + ':' + sec
+  },
+  formatDate:function(pubdate){
+    pubdate = pubdate*1000
+    var day = getDate(pubdate).getDate()
+    var mon = getDate(pubdate).getMonth() +1
+    return mon + '-' + day
+  }
+}

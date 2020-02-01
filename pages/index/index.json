@@ -1,6 +1,9 @@
 {
   "usingComponents": {
     "navigation":"/components/navigation/index",
-    "search":"/components/search/index"
+    "search":"/components/search/index",
+    "van-tab": "/miniprogram_npm/@vant/weapp/tab/index",
+    "van-tabs": "/miniprogram_npm/@vant/weapp/tabs/index",
+    "display-box":"/components/dispalyBox/index"
   }
 }

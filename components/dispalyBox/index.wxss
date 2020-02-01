@@ -1,0 +1,38 @@
+.box-wrap{
+  display: flex;
+  align-items: center;
+  padding: 15px 8px 8px 8px;
+  position: relative;
+  border-bottom: 1px solid rgb(231,231,231);
+}
+.img{
+  position: relative;
+  width: 250rpx;
+  height: 180rpx;
+  border-radius: 5px;
+}
+.desc{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 20rpx;
+}
+
+.title{
+  font-size: 28rpx;
+}
+.name,.num{
+  color: rgb(145,145,145);
+  font-size: 25rpx;
+}
+.icon{
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+.duration{
+  position: absolute;
+  bottom: 3px;
+  right: 0;
+}

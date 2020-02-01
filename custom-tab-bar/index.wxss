@@ -3,6 +3,8 @@
   bottom: 0;
   display: flex;
   width: 100%;
+  background-color: #fff;
+  border: 1px solid rgb(231,231,231)
 }
 .tab-item{
   flex:1;
@@ -11,10 +13,11 @@
   align-items: center;
 }
 .img {
+  padding: 10rpx 0;
   display: block;
   margin: 0 auto;
-  width: 35rpx;
-  height: 35rpx;
+  width: 40rpx;
+  height: 40rpx;
 }
 .text{
   font-size: 25rpx;

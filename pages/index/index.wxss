@@ -12,3 +12,9 @@
   height: 23px;
   padding-right: 15px;
 }
+.van-tab--active{
+  color: rgb(255,128,168) !important;
+}
+.swiper{
+  height: 100%;
+}

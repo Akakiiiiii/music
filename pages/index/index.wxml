@@ -4,4 +4,23 @@
   <search class="search" bindtap="skipFind" isDisabled="true"></search>
   <image src="{{gifUrl}}" class="gif"></image>
 </view>
-
+<van-tabs active="{{ active }}" color="rgb(255,128,168)" line-width="30" bind:change="changeCurrent">
+  <van-tab title="热门"></van-tab>
+  <van-tab title="追番"></van-tab>
+</van-tabs>
+<swiper bindchange="changeIndex" current="{{current}}" class="swiper">
+  <swiper-item>
+  <view wx:for="{{list[0]}}" wx:key="index">
+    <display-box 
+        imgUrl="{{item.pic}}"
+        title="{{item.title}}"
+        hotDesc="{{item.hot_desc}}"
+        authorName="{{item.author.name}}"
+        viewNb="{{item.stat.view}}"
+        pubdate="{{item.ctime}}"
+        duration="{{item.duration}}">
+    </display-box>
+    </view>
+  </swiper-item>
+  <swiper-item>追番</swiper-item>
+</swiper>

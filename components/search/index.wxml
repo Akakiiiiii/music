@@ -1,6 +1,5 @@
 <view class="input">
-<wux-icon type="ios-search" size="17" color="rgb(116,116,116)" class="icon">
-</wux-icon>
+<van-icon name="search" color="rgb(125,125,125)" />
 <input 
   value="" 
   placeholder="{{palceHolder}}"

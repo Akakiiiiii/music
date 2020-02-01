@@ -1,6 +1,6 @@
 {
   "component":true,
   "usingComponents":{
-    "wux-icon":"/demo/icon/index"
+    "van-icon": "/miniprogram_npm/@vant/weapp/icon/index"
   }
 }
